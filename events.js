@@ -45,7 +45,7 @@ function button1_Clicked(){ // click, set username (void)
 
 /* Value Events */
 function gotData1(data){ // value online (void)
-
+  console.log('value online');
   var listings = selectAll('.fuck');
   for(var i=0; i<listings.length; i++){
     listings[i].remove();
@@ -70,7 +70,7 @@ function gotData1(data){ // value online (void)
       var li = createElement('li', n + ' is online');
       if(!Naive)
        if(playingData[k].Playing){
-         console.log(73)
+         
          li.html(n + ' is online (playing)');
        }
       li.class('fuck');
@@ -88,12 +88,14 @@ function errData1(err){ // value (void)
 }
 
 function gotData2(data){ // value playing (void)
+  console.log('Value playing');
   var dt = data.val();
   if(Naive){
     playingData = dt;
   }
   for(var i=0; i<onlineList.length; i++){
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
+      console.log(98);
       var p = new Player();
       var d = dt[onlineList[i]];
       p.name = d.Name;

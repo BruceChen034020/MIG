@@ -1,6 +1,6 @@
 /*
 感謝您觀看這份程式碼
-作品名稱: N/A
+作品名稱: 微免牌
 作者: 陳光穎 Bruce Chen
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
@@ -109,7 +109,7 @@ function setup(){
   seat[3] = seat3;
   seat[4] = seat4;
 
-  setTimeout(sendOnline, 10000);
+  setTimeout(sendOnline, 100);
 }
 
 function draw(){
