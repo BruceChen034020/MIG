@@ -1,5 +1,5 @@
 /*
-版本: N/A
+版本: 1.0.0.0
 */
 function Seat(x, y, w, id){ // Class
   /* Attrubutes */
