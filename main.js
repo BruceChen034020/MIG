@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: N/A
+版本: 1.0.0.1
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -38,6 +38,7 @@ var playingData; // gotValue
 var playing = false; // this client is playing
 var Naive = true;
 var loading = true; // The website is loading and not ready to use
+var me; // me (Player)
 
 /* p5 functions */
 function setup(){

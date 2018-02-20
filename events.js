@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.0.0
+版本: 1.0.0.1
 */
 
 /* Timed Events */
@@ -105,7 +105,10 @@ function gotData2(data){ // value playing (void)
       seat[d.Seat].player = p;
       seat[d.Seat].occupied = true;
       player.push(p);
-      playing = true;
+      if(dt[onlineList[i]].Ip == ip){
+        me = p;
+        playing = true;
+      }
     }}
    if(!Naive){
     if((!dt[onlineList[i]].Playing) && seat[playingData[onlineList[i]].Seat].occupied){

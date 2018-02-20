@@ -1,5 +1,5 @@
 /*
-版本: N/A
+版本: 1.0.0.0
 */
 function Player(){ // Class
   /* Attributes */
@@ -19,5 +19,14 @@ function Player(){ // Class
   }else{
     this.sex = 1; // m
     this.profile = male;
+  }
+
+  /* Functions */
+  this.equals = function(player){
+    if(this.ip == player.ip){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

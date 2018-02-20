@@ -1,3 +1,7 @@
+/* card
+版本: 1.0.0.0
+*/
+
 function Card(name, rank, suit){ // Class
   /* Attrubutes */
   var name; // (String)
