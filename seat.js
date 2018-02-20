@@ -18,7 +18,10 @@ function Seat(x, y, w, id){ // Class
     var b = dist(x, y, this.x, this.y)<w/2;
     return b;
   }
-  this.mousePressed = function(){
+  this.mousePressed = function(){ // click event (void)
+    if(loading){
+      return;
+    }
     var ref = database.ref('playing/' + ip);
     var data = {Ip: ip,
                 Name: localStorage.getItem('name'),
@@ -29,7 +32,7 @@ function Seat(x, y, w, id){ // Class
   this.show = function(){ // update screen (void)
     fill(0);
     ellipse(this.x, this.y, this.w);
-    if(!this.occupied){
+    if((!this.occupied) && (!loading)){
       image(chair, this.x-25, this.y-25, 50, 50);
     }
     if(this.occupied){

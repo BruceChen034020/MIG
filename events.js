@@ -1,5 +1,5 @@
 /* events
-版本: N/A
+版本: 1.0.0.0
 */
 
 /* Timed Events */
@@ -23,6 +23,7 @@ function sendOnline(){ // send a message to show you are online to the server
   ref.set(data);
 
   setTimeout(sendOnline, 10000);
+  loading = false;
 }
 
 /* Click Events */
@@ -70,7 +71,7 @@ function gotData1(data){ // value online (void)
       var li = createElement('li', n + ' is online');
       if(!Naive)
        if(playingData[k].Playing){
-         
+
          li.html(n + ' is online (playing)');
        }
       li.class('fuck');
