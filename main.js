@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: 1.0.0.2
+版本: 1.0.0.3
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -106,6 +106,7 @@ function setup(){
   seat1 = new Seat(700, 300, 100, 1);
   seat4 = new Seat(400, 75, 100, 4);
   seat2 = new Seat(400, 500, 100, 2);
+  seat[0] = new Seat(0, 0, 0, 0); // padding
   seat[1] = seat1;
   seat[2] = seat2;
   seat[3] = seat3;

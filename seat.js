@@ -22,6 +22,13 @@ function Seat(x, y, w, id){ // Class
     if(loading){
       return;
     }
+    if(playing && this==me.seat){
+      return;
+    }
+    if(playing){
+      alert("不能同時坐兩個座位。");
+      return;
+    }
     var ref = database.ref('playing/' + ip);
     var data = {Ip: ip,
                 Name: localStorage.getItem('name'),

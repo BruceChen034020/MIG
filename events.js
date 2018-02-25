@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.0.2
+版本: 1.0.0.3
 */
 
 /* Timed Events */
@@ -108,7 +108,7 @@ function gotData2(data){ // value playing (void)
   }
   for(var i=0; i<onlineList.length; i++){
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
-      
+
 
       var p = new Player();
       var d = dt[onlineList[i]];
