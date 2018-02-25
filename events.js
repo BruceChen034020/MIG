@@ -1,16 +1,26 @@
 /* events
-版本: 1.0.0.1
+版本: 1.0.0.2
 */
 
 /* Timed Events */
 function sendOnline(){ // send a message to show you are online to the server
+
   if(!playing){
     var reff = database.ref('playing/' + ip);
-    var data = {Ip: ip,
+    var dataa = {Ip: ip,
                 Name: localStorage.getItem('name'),
                 Playing: false,
                 Seat: 0}
-    reff.set(data);
+    reff.set(dataa);
+    console.log(dataa);
+  }else{
+    var reff = database.ref('playing/' + ip);
+    var dataa = {Ip: ip,
+                Name: localStorage.getItem('name'),
+                Playing: true,
+                Seat: me.seat.id}
+    reff.set(dataa);
+    console.log(dataa);
   }
 
   var ref = database.ref('online/' + ip);
@@ -93,10 +103,13 @@ function gotData2(data){ // value playing (void)
   var dt = data.val();
   if(Naive){
     playingData = dt;
+    Naive = false;
+    return;
   }
   for(var i=0; i<onlineList.length; i++){
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
-      console.log(98);
+      
+
       var p = new Player();
       var d = dt[onlineList[i]];
       p.name = d.Name;
@@ -110,18 +123,21 @@ function gotData2(data){ // value playing (void)
         playing = true;
       }
     }}
-   if(!Naive){
+
     if((!dt[onlineList[i]].Playing) && seat[playingData[onlineList[i]].Seat].occupied){
+      var d = dt[onlineList[i]];
       var index = player.indexOf(seat[d.Seat].player);
       console.log(index);
       player.slice(index, 1);
       seat[d.Seat].player = null;
-      playing = false;
+      seat[d.Seat].occupied = false;
+      if(dt[onlineList[i]].Ip == ip){
+        playing = false;
+      }
     }
-   }
+
   }
   playingData = dt;
-  Naive = false;
 }
 
 function errData2(err){ // value (void)
