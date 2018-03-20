@@ -1,5 +1,5 @@
 /*
-版本: 1.0.0.0
+版本: 1.0.0.4
 */
 function Seat(x, y, w, id){ // Class
   /* Attrubutes */
@@ -22,7 +22,8 @@ function Seat(x, y, w, id){ // Class
     if(loading){
       return;
     }
-    if(playing && this==me.seat){
+    if(this.occupied){
+      alert("此座位已有人。");
       return;
     }
     if(playing){

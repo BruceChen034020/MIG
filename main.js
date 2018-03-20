@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: 1.0.0.3
+版本: 1.0.0.4
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -39,6 +39,8 @@ var playing = false; // this client is playing
 var Naive = true;
 var loading = true; // The website is loading and not ready to use
 var me; // me (Player)
+var card1;
+var StandUpButton; // the topright stand up button
 
 /* p5 functions */
 function setup(){
@@ -89,10 +91,7 @@ function setup(){
   createP('');
 
   createCanvas(800, 600);
-  var card1 = new Card('E. coli', 4, 'Pathogen');
-  fill(0, 64, 0);
-  rect(200, 200, 400, 200);
-  card1.show();
+  card1 = new Card('E. coli', 4, 'Pathogen');
 
   p1 = createP('3 people online');
 
@@ -112,14 +111,20 @@ function setup(){
   seat[3] = seat3;
   seat[4] = seat4;
 
+  StandUpButton = new SquareButton(720, 10, loadImage("standUp.png"));
+
   setTimeout(sendOnline, 3000);
 }
 
 function draw(){
-
+  background(255);
+  fill(0, 64, 0);
+  rect(200, 200, 400, 200);
+  card1.show();
   for(var i=1; i<=4; i++){
     seat[i].show();
   }
+  StandUpButton.show();
 
   /* Count online people */
   var listings = selectAll('.fuck');
@@ -132,6 +137,11 @@ function mousePressed(e){
     if(seat[i].contains(mouseX, mouseY)){
       seat[i].mousePressed();
     }
+  }
+
+  if(StandUpButton.contains(mouseX, mouseY)){
+    
+    StandUpButton.mousePressed();
   }
 }
 

@@ -108,9 +108,17 @@ function gotData2(data){ // value playing (void)
   }
   for(var i=0; i<onlineList.length; i++){
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
+      var p;
+      
+      if(Player.prototype.Contains(player, onlineList[i])){
+        var index = Player.prototype.IndexOf(player, onlineList[i]);
 
+        p = player[index];
 
-      var p = new Player();
+      }else{
+        p = new Player();
+
+      }
       var d = dt[onlineList[i]];
       p.name = d.Name;
       p.ip = d.Ip;
@@ -125,7 +133,9 @@ function gotData2(data){ // value playing (void)
     }}
 
     if((!dt[onlineList[i]].Playing) && seat[playingData[onlineList[i]].Seat].occupied){
-      var d = dt[onlineList[i]];
+
+      var d = playingData[onlineList[i]];
+
       var index = player.indexOf(seat[d.Seat].player);
       console.log(index);
       player.slice(index, 1);

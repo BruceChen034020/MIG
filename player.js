@@ -30,3 +30,20 @@ function Player(){ // Class
     }
   }
 }
+
+Player.prototype.Contains = function(list, ip){ // player list, string
+  for(var i=0; i<list.length; i++){
+    if(list[i].ip == ip){
+      return true;
+    }
+  }
+  return false;
+}
+
+Player.prototype.IndexOf = function(list, ip){ // player list, string
+  for(var i=0; i<list.length; i++){
+    if(list[i].ip == ip){
+      return i;
+    }
+  }
+}
