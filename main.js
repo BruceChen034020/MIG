@@ -44,11 +44,14 @@ var StandUpButton; // the topright stand up button
 
 /* p5 functions */
 function setup(){
+  var AccDate;
   $('body').on('contextmenu', 'canvas', function(e){ return false; });
   $.get("http://api.timezonedb.com/v2/get-time-zone?key=3VBOX4LLE9RK&format=json&by=zone&zone=America/Chicago")
-  .done(function(data){console.log(data);console.log(data.timestamp - data.gmtOffset)});
-  var sd = new Date()
-  console.log(sd.getTime()/1000);
+  .done(function(data){AccDate = data.timestamp - data.gmtOffset});
+  var clientDate = new Date();
+  if(Math.abs(AccDate-clientDate)>7){
+    alert("你的電腦時間太不準了!\r\n請調整時間，以免影響到遊戲進行。謝謝。\r\nThe time (clock) in your computer is not accurate. This might affect the experience of other players. Please correct it. Thank you.")
+  }
   $.getJSON('https://freegeoip.net/json/', function(data) {
     console.log(JSON.stringify(data, null, 2));
     var userName = data['ip']
