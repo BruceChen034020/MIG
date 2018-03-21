@@ -47,11 +47,14 @@ function setup(){
   var AccDate;
   $('body').on('contextmenu', 'canvas', function(e){ return false; });
   $.get("http://api.timezonedb.com/v2/get-time-zone?key=3VBOX4LLE9RK&format=json&by=zone&zone=America/Chicago")
-  .done(function(data){AccDate = data.timestamp - data.gmtOffset});
-  var clientDate = new Date();
-  if(Math.abs(AccDate-clientDate)>7){
-    alert("你的電腦時間太不準了!\r\n請調整時間，以免影響到遊戲進行。謝謝。\r\nThe time (clock) in your computer is not accurate. This might affect the experience of other players. Please correct it. Thank you.")
-  }
+  .done(function(data){AccDate = data.timestamp - data.gmtOffset;
+    var clientDate = new Date();
+    clientDate = clientDate.getTime()/1000;
+    console.log(AccDate, clientDate);
+    if(Math.abs(AccDate-clientDate)>7){
+      alert("你的電腦時間太不準了!\r\n請調整時間，以免影響到遊戲進行。謝謝。\r\nThe time (clock) in your computer is not accurate. This might affect the experience of other players. Please correct it. Thank you.")
+    }
+  });
   $.getJSON('https://freegeoip.net/json/', function(data) {
     console.log(JSON.stringify(data, null, 2));
     var userName = data['ip']
