@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: 1.0.0.4
+版本: 1.0.0.5
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -45,7 +45,10 @@ var StandUpButton; // the topright stand up button
 /* p5 functions */
 function setup(){
   $('body').on('contextmenu', 'canvas', function(e){ return false; });
-
+  $.get("http://api.timezonedb.com/v2/get-time-zone?key=3VBOX4LLE9RK&format=json&by=zone&zone=America/Chicago")
+  .done(function(data){console.log(data);console.log(data.timestamp - data.gmtOffset)});
+  var sd = new Date()
+  console.log(sd.getTime()/1000);
   $.getJSON('https://freegeoip.net/json/', function(data) {
     console.log(JSON.stringify(data, null, 2));
     var userName = data['ip']
@@ -114,6 +117,7 @@ function setup(){
   StandUpButton = new SquareButton(720, 10, loadImage("standUp.png"));
 
   setTimeout(sendOnline, 3000);
+
 }
 
 function draw(){
@@ -140,7 +144,7 @@ function mousePressed(e){
   }
 
   if(StandUpButton.contains(mouseX, mouseY)){
-    
+
     StandUpButton.mousePressed();
   }
 }

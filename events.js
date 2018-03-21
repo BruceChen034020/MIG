@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.0.3
+版本: 1.0.0.5
 */
 
 /* Timed Events */
@@ -107,9 +107,13 @@ function gotData2(data){ // value playing (void)
     return;
   }
   for(var i=0; i<onlineList.length; i++){
+    console.log(dt[onlineList[i]].Playing);
+    console.log(!seat[dt[onlineList[i]].Seat].occupied);
+    console.log(dt);
+    console.log(onlineList);
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
       var p;
-      
+console.log('112');
       if(Player.prototype.Contains(player, onlineList[i])){
         var index = Player.prototype.IndexOf(player, onlineList[i]);
 
@@ -117,7 +121,7 @@ function gotData2(data){ // value playing (void)
 
       }else{
         p = new Player();
-
+        console.log('120');
       }
       var d = dt[onlineList[i]];
       p.name = d.Name;
