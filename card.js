@@ -2,7 +2,7 @@
 版本: 1.0.0.0
 */
 
-function Card(name, rank, suit){ // Class
+function Card(name, rank, suit, id){ // Class
   /* Attrubutes */
   var name; // (String)
   var x; // location (int)
@@ -20,6 +20,7 @@ function Card(name, rank, suit){ // Class
   this.height = 100;
   this.rank = rank;
   this.suit = suit;
+  this.id = id; // ID of this card
 
   /* Functions */
   this.show = function(){ // update screen (void)

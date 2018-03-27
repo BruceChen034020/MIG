@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: 1.0.0.5
+版本: 1.0.0.6
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -16,6 +16,7 @@
   */
 
 /* Global variables */
+var cardList = []; // list of all cards
 var deck = []; // 抽排區 (Card array)
 var seat1; // right seat (Player)
 var seat2; // lower seat(Player)
@@ -86,9 +87,11 @@ function setup(){
   /* set ref.on */
   var ref1 = database.ref('online');
   var ref2 = database.ref('playing');
+  var ref3 = database.ref('deck');
 
   ref1.on('value', gotData1, errData1);
   ref2.on('value', gotData2, errData2);
+  ref3.on('value', gotData3, errData3);
 
   // Initailize document.body elements
   label1 = createElement('label', 'Your name: ');
@@ -99,7 +102,7 @@ function setup(){
   button1.mousePressed(button1_Clicked);
   createP('');
 
-  createCanvas(800, 600);
+  createCanvas(800 +300, 600);
   card1 = new Card('E. coli', 4, 'Pathogen');
 
   p1 = createP('3 people online');
@@ -107,6 +110,7 @@ function setup(){
   ol1 = createElement('ol');
   ol1.parent(document.body);
 
+  /* Create elements in canvas */
   chair = loadImage("./sitDown.png");
   male = loadImage("male.jpg");
   female = loadImage("female.jpg");
@@ -121,6 +125,9 @@ function setup(){
   seat[4] = seat4;
 
   StandUpButton = new SquareButton(720, 10, loadImage("standUp.png"));
+
+  /* Initialize cardList */
+  cardList = CardList_init();
 
   setTimeout(sendOnline, 3000);
 
@@ -140,6 +147,17 @@ function draw(){
   var listings = selectAll('.fuck');
   var n = listings.length;
   p1.html(n + ' people online');
+
+  /* 顯示手排 */
+
+  if(playing){
+    console.log(me.cards.length)
+    for(var i=0; i<me.cards.length; i++){
+      me.cards[i].x = 850;
+      me.cards[i].y = i*150+50;
+      me.cards[i].show();
+    }
+  }
 }
 
 function mousePressed(e){

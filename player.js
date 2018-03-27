@@ -1,15 +1,16 @@
 /*
-版本: 1.0.0.0
+版本: 1.0.0.6
 */
 function Player(){ // Class
   /* Attributes */
   this.name; // (string)
   this.ip; // IP adress (string)
-  this.cards; // 手牌 (Card array)
+  this.cards = []; // 手牌 (Card array)
   this.seat; // (Seat)
   this.playing; // playing the game (bool)
   this.sex; // sex (int) 1=male 2=female
   this.profile; // profile picture
+  this.blood = 5; // 血
 
   /* Initializer */
   var r = random(1);
@@ -20,6 +21,7 @@ function Player(){ // Class
     this.sex = 1; // m
     this.profile = male;
   }
+  Deck.prototype.deal(deck, this, 5);
 
   /* Functions */
   this.equals = function(player){

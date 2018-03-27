@@ -1,5 +1,5 @@
 /*
-版本: 1.0.0.4
+版本: 1.0.0.6
 */
 function Seat(x, y, w, id){ // Class
   /* Attrubutes */
@@ -45,6 +45,15 @@ function Seat(x, y, w, id){ // Class
     }
     if(this.occupied){
       image(this.player.profile, this.x-40, this.y-40, 80, 80);
+      stroke(0);
+      noFill();
+      rect(this.x-this.w/2, this.y+this.w/2 +10, this.w, 15);
+      fill(255, 0, 0);
+      rect(this.x-this.w/2, this.y+this.w/2 +10, this.player.blood*this.w/5, 15);
+      textAlign(CENTER);
+      fill(0);
+      stroke(255, 0, 0);
+      text(this.player.blood, this.x, this.y + this.w/2 + 30);
     }
   }
 }

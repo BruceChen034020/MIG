@@ -91,6 +91,10 @@ function gotData1(data){ // value online (void)
     }
   }
 
+  if(onlineList.length == 0){
+    deck = Deck_init();
+
+  }
 }
 
 function errData1(err){ // value (void)
@@ -107,13 +111,10 @@ function gotData2(data){ // value playing (void)
     return;
   }
   for(var i=0; i<onlineList.length; i++){
-    console.log(dt[onlineList[i]].Playing);
-    console.log(!seat[dt[onlineList[i]].Seat].occupied);
-    console.log(dt);
-    console.log(onlineList);
+
     if(dt[onlineList[i]].Playing){if(!seat[dt[onlineList[i]].Seat].occupied){ // a player sits down
       var p;
-console.log('112');
+
       if(Player.prototype.Contains(player, onlineList[i])){
         var index = Player.prototype.IndexOf(player, onlineList[i]);
 
@@ -121,7 +122,7 @@ console.log('112');
 
       }else{
         p = new Player();
-        console.log('120');
+
       }
       var d = dt[onlineList[i]];
       p.name = d.Name;
@@ -155,6 +156,19 @@ console.log('112');
 }
 
 function errData2(err){ // value (void)
+  console.log("Error!");
+  console.log(err);
+}
+
+function gotData3(data){ // value playing (void)
+  var dt = data.val();
+  for(var i=0; i<dt.Count; i++){
+    id = dt['d'+i];
+    deck[i] = cardList[id];
+  }
+}
+
+function errData3(err){ // value (void)
   console.log("Error!");
   console.log(err);
 }
