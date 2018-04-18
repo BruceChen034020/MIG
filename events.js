@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.0.7
+版本: 1.0.0.10
 */
 
 /* Timed Events */
@@ -135,6 +135,17 @@ function gotData2(data){ // value playing (void)
       if(dt[onlineList[i]].Ip == ip){
         me = p;
         playing = true;
+
+        /* upload turn */
+        var ref = database.ref('turn/');
+        var d = new Date();
+        var data = {
+          name: localStorage.getItem('name'),
+          time: d.toString(),
+          turnNumber: turnNumber,
+          player: turnPlayer
+        }
+        ref.set(data);
       }
     }}
 
@@ -163,6 +174,7 @@ function errData2(err){ // value (void)
 
 function gotData3(data){ // value deck (void)
   var dt = data.val();
+  deck = [];
   for(var i=0; i<dt.Count; i++){
     id = dt['d'+i];
     deck[i] = cardList[id];
@@ -175,19 +187,24 @@ function errData3(err){ // value (void)
 }
 
 function gotData4(data){ // value turn (void)
+  var dt = data.val();
   if(loading){
+    turnNumber = dt['turnNumber'];
+    turnPlayer = dt['player'];
     return;
   }
-  var dt = data.val();
   if(playing){
+
     if(dt['player'] == me.seat.id){ // my turn
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
+      Deck.prototype.deal(deck, me, 2);
     }else{
       timeLeft = 0;
       turnStatus = null;
     }
     turnNumber = dt['turnNumber'];
+    console.log(turnNumber)
     turnPlayer = dt['player'];
   }
 }

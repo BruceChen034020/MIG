@@ -1,11 +1,21 @@
 /* Turn Manager
-版本: 1.0.0.9 */
+版本: 1.0.0.10 */
 
 function Turn(){
 
 }
 
 Turn.prototype.nextPlayer = function(){
+  if(!playing){
+    return;
+  }
+
+  /* 棄置卡牌 */
+  if(me.cards.length > me.blood*2){
+    turnStatus = 'Discard';
+    timeLeft = timeLeftInit;
+    return;
+  }
 
   for(i=1; i<=seat.length; i++){
     var r = (turnPlayer+i)%seat.length;
@@ -33,6 +43,7 @@ Turn.prototype.nextPlayer = function(){
 }
 
 Turn.prototype.gameStart = function(){
+
   turnNumber = 0;
   turnPlayer = 0;
   Turn.prototype.nextPlayer();
@@ -53,7 +64,10 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
   if(turnStatus == 'Attack'){
     return "請選擇一位玩家, 作為攻擊的目標";
   }
+  if(turnStatus == 'Discard'){
+    return "您需要棄置 " + (me.cards.length-me.blood*2) + "張卡牌, 請選牌";
+  }
   if(turnStatus == null){ // not my turn
-    return null;
+    return 'null';
   }
 }

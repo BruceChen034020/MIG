@@ -1,5 +1,5 @@
 /* card
-版本: 1.0.0.7
+版本: 1.0.0.10
 */
 
 function Card(name, rank, suit, id){ // Class
@@ -81,25 +81,45 @@ function Card(name, rank, suit, id){ // Class
     }
   }
   this.mousePressed = function(){
-
+    if(turnStatus == null){ // not my turn
+      return;
+    }
     if(me.cards.indexOf(this) > -1){
-      if(this.suit == 'Pathogen'){
+      if(turnStatus == 'Nothing'){
+        if(this.suit == 'Pathogen'){
 
-        turnStatus = 'Attack';
-        timeLeft = timeLeftInit;
-        this.selected = true;
-      }else if(this.suit == 'Disease'){
+          turnStatus = 'Attack';
+          timeLeft = timeLeftInit;
+          for(var i=0; i<me.cards.length; i++){
+            me.cards[i].selected = false;
+          }
+          this.selected = true;
+        }else if(this.suit == 'Disease'){
 
-      }else if(this.suit == 'Organ'){
+        }else if(this.suit == 'Organ'){
 
-      }else if(this.suit == 'Immunity'){
+        }else if(this.suit == 'Immunity'){
 
-      }else{
+        }else{
+          this.x_dst = 300;
+          this.y_dst = 250;
+          var index = me.cards.indexOf(this);
+          me.cards.splice(index, 1);
+          publicCards.push(this);
+        }
+      }
+      if(turnStatus == 'Attack'){
+
+      }
+      if(turnStatus == 'Discard'){
         this.x_dst = 300;
         this.y_dst = 250;
         var index = me.cards.indexOf(this);
         me.cards.splice(index, 1);
         publicCards.push(this);
+        if(me.cards.length <= me.blood*2){
+          Turn.prototype.nextPlayer();
+        }
       }
     }
   }
