@@ -185,6 +185,7 @@ function gotData4(data){ // value turn (void)
       turnStatus = "Nothing";
     }else{
       timeLeft = 0;
+      turnStatus = null;
     }
     turnNumber = dt['turnNumber'];
     turnPlayer = dt['player'];

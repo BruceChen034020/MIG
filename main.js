@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/2/20
-版本: 1.0.0.7
+版本: 1.0.0.8
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -199,7 +199,7 @@ function draw(){
   fill(255, 0, 0);
   timeLeft -= 50;
   rect(270, 650, timeLeft/timeLeftInit * 260, 9);
-  if(timeLeft < 0){
+  if(timeLeft < 0 && turnStatus != null){
     Turn.prototype.nextPlayer();
   }
 

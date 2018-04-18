@@ -1,5 +1,5 @@
 /* Turn Manager
-版本: N/A */
+版本: 1.0.0.8 */
 
 function Turn(){
 
@@ -25,7 +25,7 @@ Turn.prototype.nextPlayer = function(){
     turnNumber: turnNumber,
     player: turnPlayer
   }
-  console.log(data)
+
   ref.set(data);
 }
 
@@ -50,7 +50,7 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
   if(turnStatus == 'Attack'){
     return "請選擇一位玩家, 作為攻擊的目標";
   }
-  if(turnStatus == null){
+  if(turnStatus == null){ // not my turn
     return null;
   }
 }
