@@ -1,20 +1,23 @@
 /* Turn Manager
-版本: 1.0.0.8 */
+版本: 1.0.0.9 */
 
 function Turn(){
 
 }
 
 Turn.prototype.nextPlayer = function(){
+
   for(i=1; i<=seat.length; i++){
     var r = (turnPlayer+i)%seat.length;
     if(seat[r].occupied){
+
       if(r <= turnPlayer){
         turnNumber++;
         turnPlayer = r;
       }else{
         turnPlayer = r;
       }
+      break;
     }
   }
   var ref = database.ref('turn/');
