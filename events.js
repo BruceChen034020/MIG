@@ -179,15 +179,16 @@ function gotData4(data){ // value turn (void)
     return;
   }
   var dt = data.val();
-  if(playing)
+  if(playing){
     if(dt['player'] == me.seat.id){ // my turn
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
     }else{
       timeLeft = 0;
     }
-  turnNumber = dt['number'];
-  turnPlayer = dt['player'];
+    turnNumber = dt['turnNumber'];
+    turnPlayer = dt['player'];
+  }
 }
 
 function errData4(err){ // value (void)

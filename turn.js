@@ -25,6 +25,7 @@ Turn.prototype.nextPlayer = function(){
     turnNumber: turnNumber,
     player: turnPlayer
   }
+  console.log(data)
   ref.set(data);
 }
 
