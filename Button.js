@@ -1,5 +1,5 @@
 /*
-版本: 1.0.0.4
+版本: 1.0.0.7
 */
 
 function SquareButton(x, y, img, width, height, action){

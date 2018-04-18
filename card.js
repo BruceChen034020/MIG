@@ -1,5 +1,5 @@
 /* card
-版本: 1.0.0.0
+版本: 1.0.0.7
 */
 
 function Card(name, rank, suit, id){ // Class

@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.0.5
+版本: 1.0.0.7
 */
 
 /* Timed Events */
@@ -186,6 +186,8 @@ function gotData4(data){ // value turn (void)
     }else{
       timeLeft = 0;
     }
+  turnNumber = dt['number'];
+  turnPlayer = dt['player'];
 }
 
 function errData4(err){ // value (void)
