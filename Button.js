@@ -2,13 +2,15 @@
 版本: 1.0.0.4
 */
 
-function SquareButton(x, y, img){
+function SquareButton(x, y, img, width, height, action){
   /* Attrubutes */
   this.x = x;
   this.y = y;
   this.img = img; // background image
-  this.width = 69;
-  this.height = 19;
+  this.width = width;
+  this.height = height;
+  this.action = action; // action after clicked
+  // action: stand_up, confirm,
 
   /* Initializer */
 
@@ -22,15 +24,17 @@ function SquareButton(x, y, img){
     return b1 && b2
   }
   this.mousePressed = function(){
-    
+
     if(loading){
       return;
     }
-    var ref = database.ref('playing/' + ip);
-    var data = {Ip: ip,
-                Name: localStorage.getItem('name'),
-                Playing: false,
-                Seat: 0}
-    ref.set(data);
+    if(this.action == 'stand_up'){
+      var ref = database.ref('playing/' + ip);
+      var data = {Ip: ip,
+                  Name: localStorage.getItem('name'),
+                  Playing: false,
+                  Seat: 0}
+      ref.set(data);
+    }
   }
 }

@@ -54,6 +54,7 @@ function Seat(x, y, w, id){ // Class
       fill(0);
       stroke(255, 0, 0);
       text(this.player.blood, this.x, this.y + this.w/2 + 30);
+      stroke(0);
     }
   }
 }

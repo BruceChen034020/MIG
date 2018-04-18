@@ -92,8 +92,9 @@ function gotData1(data){ // value online (void)
   }
 
   if(onlineList.length == 0){
+    console.log('Game start!');
     deck = Deck_init();
-
+    Turn.prototype.gameStart();
   }
 }
 
@@ -160,7 +161,7 @@ function errData2(err){ // value (void)
   console.log(err);
 }
 
-function gotData3(data){ // value playing (void)
+function gotData3(data){ // value deck (void)
   var dt = data.val();
   for(var i=0; i<dt.Count; i++){
     id = dt['d'+i];
@@ -169,6 +170,25 @@ function gotData3(data){ // value playing (void)
 }
 
 function errData3(err){ // value (void)
+  console.log("Error!");
+  console.log(err);
+}
+
+function gotData4(data){ // value turn (void)
+  if(loading){
+    return;
+  }
+  var dt = data.val();
+  if(playing)
+    if(dt['player'] == me.seat.id){ // my turn
+      timeLeft = timeLeftInit;
+      turnStatus = "Nothing";
+    }else{
+      timeLeft = 0;
+    }
+}
+
+function errData4(err){ // value (void)
   console.log("Error!");
   console.log(err);
 }

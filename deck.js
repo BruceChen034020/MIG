@@ -28,7 +28,7 @@ Deck.prototype.pop = function(cards){
 }
 
 Deck.prototype.add = function(deck, card){
-  deck += [card];
+  deck.push(card);
   Deck.prototype.shuffle(deck);
   Deck.prototype.update();
 }

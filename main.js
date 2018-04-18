@@ -35,13 +35,21 @@ var button1; // set your name (button)
 var chair; // (Image) sitDown.png
 var male; // (Image) male.jpg
 var female; // (Image) female.jpg
-var playingData; // gotValue
-var playing = false; // this client is playing
-var Naive = true;
-var loading = true; // The website is loading and not ready to use
+var playingData; // gotValue (dict)
+var playing = false; // this client is playing (bool)
+var Naive = true; // (bool)
+var loading = true; // The website is loading and not ready to use (bool)
 var me; // me (Player)
-var card1;
-var StandUpButton; // the topright stand up button
+var publicCards = []; // cards on the table (Card list)
+var StandUpButton; // the topright stand up button (SquareButton)
+var ConfirmButton; // 確定 (SquareButton)
+var CancelButton; // 取消 (SquareButton)
+var EndButton; // 結束 (SquareButton)
+var turnStatus; // me 現在在幹嘛? 非 me 的 turn => null
+var turnNumber = 0; // turn number (int)
+var turnPlayer = 0; // index of seat of player who is turn (int)
+var timeLeft; // time left for this player to move (milisecond) (int)
+var timeLeftInit = 10000; // time for every player to move (miliseconds) (int)
 
 /* p5 functions */
 function setup(){
@@ -56,7 +64,7 @@ function setup(){
       alert("你的電腦時間太不準了!\r\n請調整時間，以免影響到遊戲進行。謝謝。\r\nThe time (clock) in your computer is not accurate. This might affect the experience of other players. Please correct it. Thank you.")
     }
   });
-  $.getJSON('https://freegeoip.net/json/', function(data) {
+  $.getJSON('https://freegeoip.net/json/', function(data) { // API Key: b5c4be0c53d08e80b83b110beec9a01c
     console.log(JSON.stringify(data, null, 2));
     var userName = data['ip']
     userName += ' (' + (data['country_name']) + ')';
@@ -88,10 +96,12 @@ function setup(){
   var ref1 = database.ref('online');
   var ref2 = database.ref('playing');
   var ref3 = database.ref('deck');
+  var ref4 = database.ref('turn');
 
   ref1.on('value', gotData1, errData1);
   ref2.on('value', gotData2, errData2);
   ref3.on('value', gotData3, errData3);
+  ref4.on('value', gotData4, errData4);
 
   // Initailize document.body elements
   label1 = createElement('label', 'Your name: ');
@@ -102,8 +112,8 @@ function setup(){
   button1.mousePressed(button1_Clicked);
   createP('');
 
-  createCanvas(800 +300, 600);
-  card1 = new Card('E. coli', 4, 'Pathogen');
+  createCanvas(800 +900, 600 +120);
+  publicCards[0] = new Card('E. coli', 4, 'Pathogen');
 
   p1 = createP('3 people online');
 
@@ -124,7 +134,10 @@ function setup(){
   seat[3] = seat3;
   seat[4] = seat4;
 
-  StandUpButton = new SquareButton(720, 10, loadImage("standUp.png"));
+  StandUpButton = new SquareButton(720, 10, loadImage("standUp.png"), 69, 19, 'stand_up');
+  ConfirmButton = new SquareButton(250, 670, loadImage("confirm.png"), 100, 36, 'confirm');
+  CancelButton = new SquareButton(450, 670, loadImage("cancel.png"), 100, 36, 'cancel');
+  EndButton = new SquareButton(600, 670, loadImage("end.png"), 80, 36, 'end');
 
   /* Initialize cardList */
   cardList = CardList_init();
@@ -134,14 +147,20 @@ function setup(){
 }
 
 function draw(){
+  frameRate(20);
   background(255);
   fill(0, 64, 0);
   rect(200, 200, 400, 200);
-  card1.show();
+  Card.prototype.publicCardsDisplay();
+  for(var i=0; i<publicCards.length; i++){
+    publicCards[i].show();
+  }
   for(var i=1; i<=4; i++){
     seat[i].show();
   }
   StandUpButton.show();
+  if(!loading)
+    Turn.prototype.releaseTurn();
 
   /* Count online people */
   var listings = selectAll('.fuck');
@@ -151,13 +170,66 @@ function draw(){
   /* 顯示手排 */
 
   if(playing){
-    console.log(me.cards.length)
+    //console.log(me.cards.length)
     for(var i=0; i<me.cards.length; i++){
-      me.cards[i].x = 850;
-      me.cards[i].y = i*150+50;
+      me.cards[i].x_dst = 850;
+      me.cards[i].y_dst = i*150+40;
+    }
+    if(me.cards.length > 4){
+      for(var i=4; i<me.cards.length; i++){
+        me.cards[i].x_dst = 1100;
+        me.cards[i].y_dst = (i-4)*150+40;
+      }
+    }
+    if(me.cards.length > 8){
+      for(var i=8; i<me.cards.length; i++){
+        me.cards[i].x_dst = 1350;
+        me.cards[i].y_dst = (i-8)*150+40;
+      }
+    }
+    for(var i=0; i<me.cards.length; i++){
+      
       me.cards[i].show();
     }
   }
+
+  /* Draw time bar */
+  stroke(0);
+  rect(270, 650, 260, 9);
+  fill(255, 0, 0);
+  timeLeft -= 50;
+  rect(270, 650, timeLeft/timeLeftInit * 260, 9);
+  if(timeLeft < 0){
+    Turn.prototype.nextPlayer();
+  }
+
+  /* 右上角 */
+  textAlign(RIGHT);
+  stroke(255, 0, 0);
+  fill(255, 255, 0);
+  textSize(24);
+  textFont('標楷體');
+  text('第 ' + str(turnNumber) + ' 輪', 800, 50);
+  textSize(18);
+  stroke(0);
+  fill(255);
+  text('剩餘牌 ' + str(deck.length), 800, 80);
+  textFont('Arial');
+  stroke(0);
+  noFill();
+  textSize(12);
+
+  /* 下面 */
+  if(playing)
+    if(turnPlayer == me.seat.id){ // my turn
+      ConfirmButton.show();
+      CancelButton.show();
+      EndButton.show();
+      textAlign(CENTER);
+      textSize(18);
+      text(Turn.prototype.MessageText(), 400, 630);
+      textSize(12);
+    }
 }
 
 function mousePressed(e){
@@ -170,6 +242,17 @@ function mousePressed(e){
   if(StandUpButton.contains(mouseX, mouseY)){
 
     StandUpButton.mousePressed();
+  }
+
+  for(var i=0; i<me.cards.length; i++){
+    if(me.cards[i].contains(mouseX, mouseY)){
+      me.cards[i].mousePressed();
+    }
+  }
+  for(var i=0; i<publicCards.length; i++){
+    if(publicCards[i].contains(mouseX, mouseY)){
+      //publicCards[i].mousePressed();
+    }
   }
 }
 
