@@ -202,7 +202,7 @@ function draw(){
     timeLeft -= 50;
   rect(270, 650, timeLeft/timeLeftInit * 260, 9);
   if(timeLeft < 0 && turnStatus != null && turnStatus != undefined){
-    console.log('123')
+    
     Turn.prototype.nextPlayer();
   }
 

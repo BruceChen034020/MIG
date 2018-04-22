@@ -54,7 +54,7 @@ function Card(name, rank, suit, id){ // Class
       stroke(0);
       strokeWeight(1);
     }
-
+    this.gray = false;
     if(playing)
       if(me.cards.indexOf(this) > -1){
         if(turnStatus == "Nothing"){
@@ -65,10 +65,10 @@ function Card(name, rank, suit, id){ // Class
           }
         }
         if(turnStatus == 'Attack'){
-
+          this.gray = false;
         }
         if(turnStatus == null){
-
+          this.gray = false;
         }
       }
 

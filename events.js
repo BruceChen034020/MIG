@@ -204,7 +204,7 @@ function gotData4(data){ // value turn (void)
       turnStatus = null;
     }
     turnNumber = dt['turnNumber'];
-    console.log(turnNumber)
+    
     turnPlayer = dt['player'];
   }
 }
