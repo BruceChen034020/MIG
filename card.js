@@ -94,6 +94,7 @@ function Card(name, rank, suit, id){ // Class
             me.cards[i].selected = false;
           }
           this.selected = true;
+          order.card = this;
         }else if(this.suit == 'Disease'){
 
         }else if(this.suit == 'Organ'){

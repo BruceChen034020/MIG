@@ -36,5 +36,21 @@ function SquareButton(x, y, img, width, height, action){
                   Seat: 0}
       ref.set(data);
     }
+    if(this.action == 'confirm'){
+      if(turnStatus == 'Attack'){
+        console.log('cli')
+        order.other = 'Attack';
+        order.card.select = false;
+        order.player.seat.select = false;
+        ord = me.order.toDict();
+        var ref = database.ref('order');
+        var data = {Ip: ip,
+                    Name: localStorage.getItem('name'),
+                    srcSeatNumber: me.seat.id,
+                    Card: ord.Card,
+                    Player: ord.Player,
+                    Other: ord.Other}
+      }
+    }
   }
 }

@@ -90,7 +90,7 @@ function gotData1(data){ // value online (void)
 
     }
   }
-
+console.log(onlineList)
   if(onlineList.length == 0){
     console.log('Game start!');
     deck = Deck_init();
@@ -204,12 +204,42 @@ function gotData4(data){ // value turn (void)
       turnStatus = null;
     }
     turnNumber = dt['turnNumber'];
-    
+
     turnPlayer = dt['player'];
   }
 }
 
 function errData4(err){ // value (void)
+  console.log("Error!");
+  console.log(err);
+}
+
+function gotData5(data){ // value order (void)
+  if(loading){
+    return;
+  }
+  var dt = data.val();
+  if(dt['Ip'] == ip){
+    this.x_dst = 300;
+    this.y_dst = 250;
+    var index = me.cards.indexOf(cardList[dt.Card]);
+    me.cards.splice(index, 1);
+    publicCards.push(cardList[dt.Card]);
+  }else{
+    srcPointX = seat[dt.Player].x;
+    srcPointY = seat[dt.Player].y;
+    c = cardList[dt.Card];
+    c.x = srcPointX;
+    c.y = srcPointY;
+    publicCards.push(c);
+  }
+  if(dt.Other == 'Attack'){
+
+
+  }
+}
+
+function errData5(err){ // value (void)
   console.log("Error!");
   console.log(err);
 }

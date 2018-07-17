@@ -12,6 +12,10 @@ Turn.prototype.nextPlayer = function(){
 
   /* 棄置卡牌 */
   if(me.cards.length > me.blood*2){
+    if(turnStatus == 'Discard'){
+      /* 自動棄牌 */
+
+    }
     turnStatus = 'Discard';
     timeLeft = timeLeftInit;
     return;

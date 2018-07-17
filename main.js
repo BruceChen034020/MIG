@@ -5,7 +5,7 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2018/2/20
+最後修改日期: 2018/6/18
 版本: 1.0.0.10
 發表於: https://brucechen034020.github.io/
 程式碼尺度
@@ -50,6 +50,7 @@ var turnNumber = 0; // turn number (int)
 var turnPlayer = 0; // index of seat of player who is turn (int)
 var timeLeft; // time left for this player to move (milisecond) (int)
 var timeLeftInit = 10000; // time for every player to move (miliseconds) (int)
+var order; // the last order player committed
 
 /* p5 functions */
 function setup(){
@@ -97,11 +98,13 @@ function setup(){
   var ref2 = database.ref('playing');
   var ref3 = database.ref('deck');
   var ref4 = database.ref('turn');
+  var ref5 = database.ref('order');
 
   ref1.on('value', gotData1, errData1);
   ref2.on('value', gotData2, errData2);
   ref3.on('value', gotData3, errData3);
   ref4.on('value', gotData4, errData4);
+  ref5.on('value', gotData5, errData5);
 
   // Initailize document.body elements
   label1 = createElement('label', 'Your name: ');
@@ -202,7 +205,7 @@ function draw(){
     timeLeft -= 50;
   rect(270, 650, timeLeft/timeLeftInit * 260, 9);
   if(timeLeft < 0 && turnStatus != null && turnStatus != undefined){
-    
+
     Turn.prototype.nextPlayer();
   }
 
