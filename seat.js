@@ -1,5 +1,6 @@
 /*
-版本: 1.0.0.7
+版本: 1.0.0.10
+2018/8/7
 */
 function Seat(x, y, w, id){ // Class
   /* Attrubutes */
@@ -50,6 +51,7 @@ function Seat(x, y, w, id){ // Class
       }
       this.selected = true;
       order.player = this.player;
+      ConfirmButton.img = loadImage("confirm_red.png");
     }
   }
   this.show = function(){ // update screen (void)

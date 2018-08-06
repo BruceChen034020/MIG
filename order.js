@@ -1,5 +1,6 @@
 /*
-版本: 1.0.0.7
+版本: 1.0.0.10
+2018/8/7
 */
 
 function Order(card, player, other){
@@ -18,5 +19,6 @@ function Order(card, player, other){
     d = {Card: c,
          Player: p,
          Other: an}
+    return d;
   }
 }

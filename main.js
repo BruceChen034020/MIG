@@ -5,7 +5,7 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2018/7/18
+最後修改日期: 2018/8/7
 版本: 1.0.0.10
 發表於: https://brucechen034020.github.io/
 程式碼尺度
@@ -146,7 +146,7 @@ function setup(){
   cardList = CardList_init();
 
   setTimeout(sendOnline, 3000);
-
+order = new Order(null, null, null);
 }
 
 function draw(){
@@ -248,6 +248,15 @@ function mousePressed(e){
   if(StandUpButton.contains(mouseX, mouseY)){
 
     StandUpButton.mousePressed();
+  }
+  if(EndButton.contains(mouseX, mouseY)){
+    EndButton.mousePressed();
+  }
+  if(ConfirmButton.contains(mouseX, mouseY)){
+    ConfirmButton.mousePressed();
+  }
+  if(CancelButton.contains(mouseX, mouseY)){
+    CancelButton.mousePressed();
   }
 
   for(var i=0; i<me.cards.length; i++){

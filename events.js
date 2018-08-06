@@ -1,5 +1,6 @@
 /* events
 版本: 1.0.0.10
+2018/8/7
 */
 
 /* Timed Events */
@@ -237,6 +238,7 @@ function gotData5(data){ // value order (void)
 
 
   }
+  order = new Order(dt.Card, dt.Player, dt.Other);
 }
 
 function errData5(err){ // value (void)
