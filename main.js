@@ -5,7 +5,7 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2018/6/18
+最後修改日期: 2018/7/18
 版本: 1.0.0.10
 發表於: https://brucechen034020.github.io/
 程式碼尺度
@@ -65,7 +65,7 @@ function setup(){
       alert("你的電腦時間太不準了!\r\n請調整時間，以免影響到遊戲進行。謝謝。\r\nThe time (clock) in your computer is not accurate. This might affect the experience of other players. Please correct it. Thank you.")
     }
   });
-  $.getJSON('https://freegeoip.net/json/', function(data) { // API Key: b5c4be0c53d08e80b83b110beec9a01c
+  $.getJSON('https://ipapi.co/json/', function(data) { // API Key: b5c4be0c53d08e80b83b110beec9a01c
     console.log(JSON.stringify(data, null, 2));
     var userName = data['ip']
     userName += ' (' + (data['country_name']) + ')';
