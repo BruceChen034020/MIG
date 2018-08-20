@@ -1,6 +1,6 @@
 /*
-版本: 1.0.0.10
-2018/8/7
+版本: 1.0.1.0
+2018/8/20
 */
 
 function SquareButton(x, y, img, width, height, action){
@@ -41,11 +41,11 @@ function SquareButton(x, y, img, width, height, action){
       if(turnStatus == 'Attack'){
         console.log('cli')
         order.other = 'Attack';
-        order.card.select = false;
-        order.player.seat.select = false;
-
+        order.card.selected = false;
+        order.player.seat.selected = false;
+        console.log(order);
         ord = order.toDict();
-        
+
         var ref = database.ref('order');
         var data = {Ip: ip,
                     Name: localStorage.getItem('name'),
@@ -55,9 +55,21 @@ function SquareButton(x, y, img, width, height, action){
                     Other: ord.Other}
         ref.set(data);
       }
+      ConfirmButton.img = loadImage("confirm.png");
     }
     if(this.action == 'end'){
       Turn.prototype.nextPlayer();
+    }
+    if(this.action == 'cancel'){
+      turnStatus = 'Nothing';
+      timeLeft = timeLeftInit;
+      for(var i=0; i<me.cards.length; i++){
+        me.cards[i].selected = false;
+      }
+      for(var i=0; i<seat.length; i++){
+        seat[i].selected = false;
+      }
+      ConfirmButton.img = loadImage("confirm.png");
     }
   }
 }
