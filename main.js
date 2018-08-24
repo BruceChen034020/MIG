@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/8/24
-版本: 1.0.1.1
+版本: 1.0.1.2
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -151,7 +151,7 @@ order = new Order(null, null, null);
 
 function draw(){
 
-  frameRate(20);
+  frameRate(10);
   background(255);
   fill(0, 64, 0);
   rect(200, 200, 400, 200);
