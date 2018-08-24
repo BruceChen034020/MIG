@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.1.3
+版本: 1.0.1.4
 2018/8/24
 */
 
@@ -258,6 +258,25 @@ function gotData5(data){ // value order (void)
 }
 
 function errData5(err){ // value (void)
+  console.log("Error!");
+  console.log(err);
+}
+
+function gotData6(data){ // value order (void)
+  console.log('value blood');
+  if(loading){
+    return;
+  }
+  var dt = data.val();
+  for(var j=0; j<player.length; j++){
+    player[j].blood = dt[player[j].ip];
+  }
+  if(dt.Ip != ip){
+    Turn.prototype.nextPlayer();
+  }
+}
+
+function errData6(err){ // value (void)
   console.log("Error!");
   console.log(err);
 }

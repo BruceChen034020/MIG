@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/8/24
-版本: 1.0.1.3
+版本: 1.0.1.4
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -99,12 +99,14 @@ function setup(){
   var ref3 = database.ref('deck');
   var ref4 = database.ref('turn');
   var ref5 = database.ref('order');
+  var ref6 = database.ref('blood');
 
   ref1.on('value', gotData1, errData1);
   ref2.on('value', gotData2, errData2);
   ref3.on('value', gotData3, errData3);
   ref4.on('value', gotData4, errData4);
   ref5.on('value', gotData5, errData5);
+  ref6.on('value', gotData6, errData6);
 
   // Initailize document.body elements
   label1 = createElement('label', 'Your name: ');
@@ -150,7 +152,7 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-console.log(turnStatus)
+
   frameRate(10);
   background(255);
   fill(0, 64, 0);

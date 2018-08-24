@@ -1,5 +1,5 @@
 /*
-版本: 1.0.1.3
+版本: 1.0.1.4
 2018/8/24
 */
 function Player(){ // Class
@@ -46,8 +46,6 @@ function Player(){ // Class
     var ref = database.ref('blood');
     ref.set(Blood);
     turnStatus = null;
-
-    // send a blood loss message
   }
 }
 
