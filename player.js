@@ -1,5 +1,6 @@
 /*
-版本: 1.0.1.1
+版本: 1.0.1.3
+2018/8/24
 */
 function Player(){ // Class
   /* Attributes */
@@ -31,8 +32,11 @@ function Player(){ // Class
       return false;
     }
   }
-  this.reduceBlood = function(){ // 扣血並更新 server
-    this.blood -= 1;
+  this.reduceBlood = function(loss){ // 扣血並更新 server
+    this.blood -= loss;
+    if(this.blood <=0){
+      // game over
+    }
     Blood = {'Ip': ip, 'Name': localStorage.getItem('name')};
     for(var i=0; i<player.length; i++){
       Blood[player[i].ip] = player[i].blood;
@@ -41,6 +45,9 @@ function Player(){ // Class
     Blood['Time'] = d.toString();
     var ref = database.ref('blood');
     ref.set(Blood);
+    turnStatus = null;
+
+    // send a blood loss message
   }
 }
 

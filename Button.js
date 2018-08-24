@@ -1,6 +1,6 @@
 /*
-版本: 1.0.1.1
-2018/8/20
+版本: 1.0.1.3
+2018/8/24
 */
 
 function SquareButton(x, y, img, width, height, action){
@@ -54,14 +54,16 @@ function SquareButton(x, y, img, width, height, action){
                     Player: ord.Player,
                     Other: ord.Other}
         ref.set(data);
+        turnStatus = 'Freeze';
       }
       ConfirmButton.img = loadImage("confirm.png");
-      turnStatus = 'Freeze';
     }
     if(this.action == 'end'){
-      Turn.prototype.nextPlayer();
       if(turnStatus == 'Attacked' || turnStatus=='Idu' || turnStatus=='Immune'){
-        
+
+        me.reduceBlood(1);
+      }else{
+        Turn.prototype.nextPlayer();
       }
     }
     if(this.action == 'cancel'){

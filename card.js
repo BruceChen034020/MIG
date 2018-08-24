@@ -1,5 +1,6 @@
 /* card
-版本: 1.0.1.1
+版本: 1.0.1.3
+2018/8/24
 */
 
 function Card(name, rank, suit, id){ // Class
@@ -142,12 +143,15 @@ function Card(name, rank, suit, id){ // Class
       if(turnStatus == "Attacked" && this.gray == false){
         if(this.suit == 'Pathogen'){
           turnStatus = "Idu";
+          timeLeft = timeLeftInit;
         }else if(this.suit == 'Disease'){
           turnStatus = "Idu";
+          timeLeft = timeLeftInit;
         }else if(this.suit == 'Organ'){
 
         }else if(this.suit == 'Immunity'){
           turnStatus = "Immune";
+          timeLeft = timeLeftInit;
         }else{
 
         }

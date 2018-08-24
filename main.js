@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/8/24
-版本: 1.0.1.2
+版本: 1.0.1.3
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -150,7 +150,7 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-
+console.log(turnStatus)
   frameRate(10);
   background(255);
   fill(0, 64, 0);
@@ -204,9 +204,13 @@ function draw(){
   if(turnStatus != null)
     timeLeft -= 50;
   rect(270, 650, timeLeft/timeLeftInit * 260, 9);
-  if(timeLeft < 0 && turnStatus != null && turnStatus != undefined){
+  if(timeLeft < 0 && turnStatus != null && turnStatus != undefined && turnStatus != 'Attacked' && turnStatus != 'Idu' && turnStatus != 'Immune'){
 
     Turn.prototype.nextPlayer();
+  }
+  if(timeLeft < 0 && !(turnStatus != 'Attacked' && turnStatus != 'Idu' && turnStatus != 'Immune')){ // 迪摩根
+
+    me.reduceBlood(1);
   }
 
   /* 右上角 */
@@ -228,6 +232,15 @@ function draw(){
   /* 下面 */
   if(playing)
     if(turnPlayer == me.seat.id){ // my turn
+      ConfirmButton.show();
+      CancelButton.show();
+      EndButton.show();
+      textAlign(CENTER);
+      textSize(18);
+      text(Turn.prototype.MessageText(), 400, 630);
+      textSize(12);
+    }
+    if(turnStatus != null){
       ConfirmButton.show();
       CancelButton.show();
       EndButton.show();

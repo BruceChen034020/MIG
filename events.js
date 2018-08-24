@@ -1,6 +1,6 @@
 /* events
-版本: 1.0.0.10
-2018/8/7
+版本: 1.0.1.3
+2018/8/24
 */
 
 /* Timed Events */
@@ -200,6 +200,12 @@ function gotData4(data){ // value turn (void)
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
       Deck.prototype.deal(deck, me, 2);
+      for(var i=0; i<me.cards.length; i++){
+        me.cards[i].selected = false;
+      }
+      for(var i=0; i<seat.length; i++){
+        seat[i].selected = false;
+      }
     }else{
       timeLeft = 0;
       turnStatus = null;
@@ -220,6 +226,7 @@ function gotData5(data){ // value order (void)
     return;
   }
   var dt = data.val();
+  order = new Order(dt.Card, dt.Player, dt.Other, dt.srcSeatNumber);
   if(dt['Ip'] == ip){
     this.x_dst = 300;
     this.y_dst = 250;
@@ -227,23 +234,27 @@ function gotData5(data){ // value order (void)
     me.cards.splice(index, 1);
     publicCards.push(cardList[dt.Card]);
   }else{
-    srcPointX = seat[dt.Player].x;
-    srcPointY = seat[dt.Player].y;
+    console.log(seat[2]);
+    console.log(seat[dt.srcSeatNumber]);
+    srcPointX = seat[dt.srcSeatNumber].x;
+    srcPointY = seat[dt.srcSeatNumber].y;
     c = cardList[dt.Card];
-    c.x = srcPointX;
-    c.y = srcPointY;
+    console.log(srcPointX, srcPointY);
+    c.x = srcPointX - c.width/2;
+    c.y = srcPointY - c.height/2;
     publicCards.push(c);
   }
   if(dt['Player'] == me.seat.id){
     if(turnStatus == null){
       turnStatus = 'Attacked';
+      timeLeft = timeLeftInit;
     }
   }
   if(dt.Other == 'Attack'){
 
 
   }
-  order = new Order(dt.Card, dt.Player, dt.Other);
+
 }
 
 function errData5(err){ // value (void)

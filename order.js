@@ -1,13 +1,14 @@
 /*
-版本: 1.0.0.10
-2018/8/7
+版本: 1.0.1.3
+2018/8/24
 */
 
-function Order(card, player, other){
+function Order(card, player, other, srcSeatNumber){
   /* Attrubutes */
   this.card = card;
   this.player = player;
   this.other = other; // other information
+  this.srcSeatNumber = srcSeatNumber;
 
   /* Initializer */
 

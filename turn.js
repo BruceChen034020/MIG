@@ -1,5 +1,5 @@
 /* Turn Manager
-版本: 1.0.1.1 */
+版本: 1.0.1.3 */
 
 function Turn(){
 
@@ -75,7 +75,9 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
     return "";
   }
   if(turnStatus == 'Attacked'){
-    return (order.player) + "對你使用了 Pathogen, 請以毒攻毒或使用免疫";
+    console.log(order.srcSeatNumber);
+    console.log(seat[order.srcSeatNumber]);
+    return (seat[order.srcSeatNumber].player.name) + " 對你使用了 Pathogen, 請以毒攻毒或使用免疫";
   }
   if(turnStatus == 'Idu'){
     return "以毒攻毒";
