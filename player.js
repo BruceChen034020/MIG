@@ -1,5 +1,5 @@
 /*
-版本: 1.0.0.7
+版本: 1.0.1.1
 */
 function Player(){ // Class
   /* Attributes */
