@@ -234,6 +234,11 @@ function gotData5(data){ // value order (void)
     c.y = srcPointY;
     publicCards.push(c);
   }
+  if(dt['Player'] == me.seat.id){
+    if(turnStatus == null){
+      turnStatus = 'Attacked';
+    }
+  }
   if(dt.Other == 'Attack'){
 
 

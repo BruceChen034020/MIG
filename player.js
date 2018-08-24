@@ -31,6 +31,17 @@ function Player(){ // Class
       return false;
     }
   }
+  this.reduceBlood = function(){ // 扣血並更新 server
+    this.blood -= 1;
+    Blood = {'Ip': ip, 'Name': localStorage.getItem('name')};
+    for(var i=0; i<player.length; i++){
+      Blood[player[i].ip] = player[i].blood;
+    }
+    var d = new Date();
+    Blood['Time'] = d.toString();
+    var ref = database.ref('blood');
+    ref.set(Blood);
+  }
 }
 
 Player.prototype.Contains = function(list, ip){ // player list, string

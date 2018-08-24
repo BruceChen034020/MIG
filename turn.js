@@ -1,5 +1,5 @@
 /* Turn Manager
-版本: 1.0.0.10 */
+版本: 1.0.1.1 */
 
 function Turn(){
 
@@ -70,6 +70,18 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
   }
   if(turnStatus == 'Discard'){
     return "您需要棄置 " + (me.cards.length-me.blood*2) + "張卡牌, 請選牌";
+  }
+  if(turnStatus == 'Freeze'){
+    return "";
+  }
+  if(turnStatus == 'Attacked'){
+    return (order.player) + "對你使用了 Pathogen, 請以毒攻毒或使用免疫";
+  }
+  if(turnStatus == 'Idu'){
+    return "以毒攻毒";
+  }
+  if(turnStatus == 'Immune'){
+    return "使用免疫";
   }
   if(turnStatus == null){ // not my turn
     return 'null';

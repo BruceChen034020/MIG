@@ -1,18 +1,18 @@
 /* card
-版本: 1.0.0.10
+版本: 1.0.1.1
 */
 
 function Card(name, rank, suit, id){ // Class
   /* Attrubutes */
-  var name; // (String)
-  var x; // location (int)
-  var y; // location (int)
-  var x_dst; // Location x destination (int)
-  var y_dst; // Location y destination (int)
-  var width; // (int)
-  var height; // (int)
-  var rank; // (int)
-  var suit; // (string) 4 kinds: Organ, Pathogen, Disease, Immunity
+  // var name; // (String)
+  // var x; // location (int)
+  // var y; // location (int)
+  // var x_dst; // Location x destination (int)
+  // var y_dst; // Location y destination (int)
+  // var width; // (int)
+  // var height; // (int)
+  // var rank; // (int)
+  // var suit; // (string) 4 kinds: Organ, Pathogen, Disease, Immunity
 
   /* Initializer */
   this.name = name;
@@ -25,6 +25,13 @@ function Card(name, rank, suit, id){ // Class
   this.id = id; // ID of this card
   this.selected = false;
   this.gray = false;
+  this.pair = []; // 以毒攻毒
+  this.immune = []; // 免疫
+  this.annotation = ""; // 註解
+  this.annotation2 = ""; // Lymphocyte
+  this.immuneEffective = []; // 免疫生效數字
+  this.media = []; // media for disease
+  this.pathogenType = ""; // pathogen type: bacteria, virus, parasites
 
   /* Functions */
   this.show = function(){ // update screen (void)
@@ -42,6 +49,7 @@ function Card(name, rank, suit, id){ // Class
     textAlign(LEFT, TOP);
     noFill();
     text(this.rank + ' ' + this.suit, this.x +6, this.y +6);
+    text(this.annotation, this.x+6, this.y+this.height-15);
 
     this.x = this.x*(2/3) + this.x_dst*(1/3);
     this.y = this.y*(2/3) + this.y_dst*(1/3);
@@ -69,6 +77,15 @@ function Card(name, rank, suit, id){ // Class
         }
         if(turnStatus == null){
           this.gray = false;
+        }
+        if(turnStatus == 'Attacked'){
+          if(this.pair == order.card){
+            this.gray = false;
+          }else if(order.immune == this){
+            this.gray = false;
+          }else{
+            this.gray = true;
+          }
         }
       }
 
@@ -120,6 +137,19 @@ function Card(name, rank, suit, id){ // Class
         publicCards.push(this);
         if(me.cards.length <= me.blood*2){
           Turn.prototype.nextPlayer();
+        }
+      }
+      if(turnStatus == "Attacked" && this.gray == false){
+        if(this.suit == 'Pathogen'){
+          turnStatus = "Idu";
+        }else if(this.suit == 'Disease'){
+          turnStatus = "Idu";
+        }else if(this.suit == 'Organ'){
+
+        }else if(this.suit == 'Immunity'){
+          turnStatus = "Immune";
+        }else{
+
         }
       }
     }

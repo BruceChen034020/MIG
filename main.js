@@ -5,8 +5,8 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2018/8/7
-版本: 1.0.0.10
+最後修改日期: 2018/8/24
+版本: 1.0.1.1
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -45,7 +45,7 @@ var StandUpButton; // the topright stand up button (SquareButton)
 var ConfirmButton; // 確定 (SquareButton)
 var CancelButton; // 取消 (SquareButton)
 var EndButton; // 結束 (SquareButton)
-var turnStatus; // me 現在在幹嘛? 非 me 的 turn => null
+var turnStatus; // me 現在在幹嘛? 非 me 的 turn => null. null(not my turn), Nothing(未選牌), Attack(選了牌未攻擊), Discard(棄牌階段), Freeze(攻擊了別人等回應), Attacked(被攻擊做回應), Idu(以毒攻毒), Immune(免疫)
 var turnNumber = 0; // turn number (int)
 var turnPlayer = 0; // index of seat of player who is turn (int)
 var timeLeft; // time left for this player to move (milisecond) (int)

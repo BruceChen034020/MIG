@@ -1,5 +1,5 @@
 /*
-版本: 1.0.1.0
+版本: 1.0.1.1
 2018/8/20
 */
 
@@ -56,9 +56,13 @@ function SquareButton(x, y, img, width, height, action){
         ref.set(data);
       }
       ConfirmButton.img = loadImage("confirm.png");
+      turnStatus = 'Freeze';
     }
     if(this.action == 'end'){
       Turn.prototype.nextPlayer();
+      if(turnStatus == 'Attacked' || turnStatus=='Idu' || turnStatus=='Immune'){
+        
+      }
     }
     if(this.action == 'cancel'){
       turnStatus = 'Nothing';
