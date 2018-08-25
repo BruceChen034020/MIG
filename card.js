@@ -1,5 +1,5 @@
 /* card
-版本: 1.0.1.6
+版本: 1.0.1.7
 2018/8/25
 */
 
@@ -47,7 +47,13 @@ function Card(name, rank, suit, id){ // Class
     rect(this.x, this.y, this.width, this.height);
     textAlign(CENTER);
     fill(0);
-    text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 + 6);
+    if(this.name.length > 200){
+      text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 - 30);
+    }else if(this.name.length > 70){
+      text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 - 15);
+    }else{
+      text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 + 6);
+    }
     textAlign(LEFT, TOP);
     noFill();
     text(this.rank + ' ' + this.suit, this.x +6, this.y +6);

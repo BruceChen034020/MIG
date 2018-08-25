@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/8/25
-版本: 1.0.1.5
+版本: 1.0.1.7
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -146,7 +146,7 @@ function setup(){
   EndButton = new SquareButton(600, 670, loadImage("end.png"), 80, 36, 'end');
 
   /* Initialize cardList */
-  cardList = CardList_init();
+  cardList = CardList_init(); publicCards[0] = cardList[14]; console.log(cardList[14].name.length)
 
   setTimeout(sendOnline, 3000);
 order = new Order(null, null, null);
