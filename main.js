@@ -146,7 +146,7 @@ function setup(){
   EndButton = new SquareButton(600, 670, loadImage("end.png"), 80, 36, 'end');
 
   /* Initialize cardList */
-  cardList = CardList_init(); publicCards[0] = cardList[14]; console.log(cardList[14].name.length)
+  cardList = CardList_init(); 
 
   setTimeout(sendOnline, 3000);
 order = new Order(null, null, null);
