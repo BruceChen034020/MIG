@@ -1,5 +1,5 @@
 /* card
-版本: 1.0.1.5
+版本: 1.0.1.6
 2018/8/25
 */
 
@@ -101,14 +101,16 @@ function Card(name, rank, suit, id){ // Class
       stroke(0, 255, 0);
       fill(0, 255, 0);
       textSize(72);
-      text('V', c.x+c.width/2, c.y+c.height/2);
+      text('V', this.x+c.width/2, this.y+this.height/2);
+      textSize(12);
       return true;
     }else if(this.bigMark == 'X'){
       textAlign(CENTER);
       stroke(255, 0, 0);
       fill(255, 0, 0);
       textSize(72);
-      text('X', c.x+c.width/2, c.y+c.height/2);
+      text('X', this.x+this.width/2, this.y+this.height/2);
+      textSize(12);
       return false;
     }
   }
