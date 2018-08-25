@@ -23,7 +23,7 @@ function immuneDeal(){ // 抽牌判斷是否有效
 
   setTimeout(Deck.prototype.clearPublic(publicCards, deck, true), 3000);
   if(!b){
-    me.reduceBlood();
+    me.reduceBlood(1);
   }
 }
 

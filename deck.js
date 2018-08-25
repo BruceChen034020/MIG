@@ -52,10 +52,11 @@ Deck.prototype.clearPublic = function(publicCard, deck, update){ // 將所有 pu
 
   if(update)
     Deck.prototype.add(deck, publicCard);
-  for(var i=0; i<publicCards.length; i++){
-    publicCards[i].x_dst = publicCards[i].y_dst = 0;
+  for(var i=0; i<publicCard.length; i++){
+    //publicCard[i].x_dst = publicCard[i].y_dst = -100;
+    publicCard[i].bigMark = "";
   }
-  setTimeout(function(){publicCards = [];}, 1000);
+  setTimeout(function(){publicCard = [];}, 1000);
 }
 
 Deck.prototype.update = function(){ // update the deck information on server

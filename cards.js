@@ -474,15 +474,21 @@ function cardList_immune(c){
       if(c[i].pathogenType == "Virus"){
         c[i].immune.push(c[61], c[144], c[14]);
       }
-      if(c[i].media != "Arthropod"){
+      /*if(c[i].media != "Arthropod"){
         c[i].immune.push(c[64]);
-      }
+      }*/
       if(c[i].media == "Soil" || c[i].media == "Contact"){
         c[i].immune.push(c[129]);
       }
     }
   }
-
+  for(var i=25; i<= 191; i++){
+    if(c[i].suit == "Disease"){
+      for(var j=0; j<c[i].pair.length; j++){
+        c[i].pair[j].immune.push(c[64]);
+      }
+    }
+  }
   for(var i=166; i<=175; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
