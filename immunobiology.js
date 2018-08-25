@@ -21,7 +21,6 @@ function immuneDeal(){ // 抽牌判斷是否有效
               Effective: b}
   ref.set(data);
 
-  setTimeout(Deck.prototype.clearPublic(publicCards, deck, true), 3000);
   if(!b){
     me.reduceBlood(1);
   }

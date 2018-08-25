@@ -197,6 +197,7 @@ function gotData4(data){ // value turn (void)
   if(playing){
 
     if(dt['player'] == me.seat.id){ // my turn
+      console.log('clear public true')
       Deck.prototype.clearPublic(publicCards, deck, true);
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
@@ -208,6 +209,7 @@ function gotData4(data){ // value turn (void)
         seat[i].selected = false;
       }
     }else{
+      console.log('clear public false')
       Deck.prototype.clearPublic(publicCards, deck, false);
       timeLeft = 0;
       turnStatus = null;

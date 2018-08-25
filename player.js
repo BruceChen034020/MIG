@@ -25,6 +25,14 @@ function Player(){ // Class
   Deck.prototype.deal(deck, this, 5);
 
   /* Functions */
+  this.printCards = function(){
+    console.log(this.cards.length + ' cards');
+    var s = ""
+    for(var i=0; i<this.cards.length; i++){
+      s += this.cards[i].id + ' ';
+    }
+    console.log(s);
+  }
   this.equals = function(player){
     if(this.ip == player.ip){
       return true;

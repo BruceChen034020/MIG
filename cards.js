@@ -98,7 +98,7 @@ c[55].immuneEffective = [4];
 c[56] = new Card("Salmonella enterica Typhi (serotype)", 1, "Pathogen", 56);
 c[57] = new Card("Typhoid fever", 2, "Disease", 57);
 c[58] = new Card("Mast cell", 3, "Immunity", 58);
-c[58].annoation = "1生效";
+c[58].annotation = "1生效";
 c[58].immuneEffective = [1];
 c[59] = new Card("Salmonella enterica Typhimurium (serotype)", 4, "Pathogen", 59);
 c[60] = new Card("Salmonellosis", 1, "Disease", 60);
@@ -477,7 +477,7 @@ function cardList_immune(c){
       /*if(c[i].media != "Arthropod"){
         c[i].immune.push(c[64]);
       }*/
-      if(c[i].media == "Soil" || c[i].media == "Contact"){
+      if(c[i].media.includes("Soil") || c[i].media.includes("Contact")){
         c[i].immune.push(c[129]);
       }
     }
@@ -585,7 +585,7 @@ function cardList_media(c){
   for(var i=0; i<c.length; i++){
     if(c[i].suit == "Pathogen"){
       for(var j=0; j<c[i].pair.length; j++)
-        c[i].media += c[i].pair[j].media;
+        c[i].media.push(c[i].pair[j].media);
     }
   }
 }

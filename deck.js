@@ -48,15 +48,23 @@ Deck.prototype.deal = function(deck, player, numCard){ // 發牌
   Deck.prototype.update();
 }
 
-Deck.prototype.clearPublic = function(publicCard, deck, update){ // 將所有 public card 放回抽牌區
+Deck.prototype.clearPublic = function(publicCards, deck, update){ // 將所有 public card 放回抽牌區
 
   if(update)
-    Deck.prototype.add(deck, publicCard);
-  for(var i=0; i<publicCard.length; i++){
-    //publicCard[i].x_dst = publicCard[i].y_dst = -100;
-    publicCard[i].bigMark = "";
+    Deck.prototype.add(deck, publicCards);
+  for(var i=0; i<publicCards.length; i++){
+    // publicCards[i].x_dst = publicCards[i].y_dst = -100;
+    setTimeout(Deck.prototype.washCards, 1000);
   }
-  setTimeout(function(){publicCard = [];}, 1000);
+  setTimeout(Deck.prototype.clearPublic2, 1000);
+}
+
+Deck.prototype.clearPublic2 = function(){publicCards = [];}
+
+Deck.prototype.washCards = function(){ // wash away all marks
+  for(var i=0; i<deck.length; i++){
+    deck[i].bigMark = "";
+  }
 }
 
 Deck.prototype.update = function(){ // update the deck information on server

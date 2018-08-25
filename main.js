@@ -146,14 +146,14 @@ function setup(){
   EndButton = new SquareButton(600, 670, loadImage("end.png"), 80, 36, 'end');
 
   /* Initialize cardList */
-  cardList = CardList_init(); 
+  cardList = CardList_init();
 
   setTimeout(sendOnline, 3000);
 order = new Order(null, null, null);
 }
 
 function draw(){
-
+if(playing) me.printCards();
   frameRate(10);
   background(255);
   fill(0, 64, 0);
