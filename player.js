@@ -1,6 +1,6 @@
 /*
-版本: 1.0.1.4
-2018/8/24
+版本: 1.0.1.5
+2018/8/25
 */
 function Player(){ // Class
   /* Attributes */
@@ -41,11 +41,13 @@ function Player(){ // Class
     for(var i=0; i<player.length; i++){
       Blood[player[i].ip] = player[i].blood;
     }
+    this.blood += loss; // 為了讓特效出來
     var d = new Date();
     Blood['Time'] = d.toString();
     var ref = database.ref('blood');
     ref.set(Blood);
     turnStatus = null;
+    Deck.prototype.clearPublic(publicCards, deck, true);
   }
 }
 

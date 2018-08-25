@@ -5,8 +5,8 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2018/8/24
-版本: 1.0.1.4
+最後修改日期: 2018/8/25
+版本: 1.0.1.5
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -45,12 +45,13 @@ var StandUpButton; // the topright stand up button (SquareButton)
 var ConfirmButton; // 確定 (SquareButton)
 var CancelButton; // 取消 (SquareButton)
 var EndButton; // 結束 (SquareButton)
-var turnStatus; // me 現在在幹嘛? 非 me 的 turn => null. null(not my turn), Nothing(未選牌), Attack(選了牌未攻擊), Discard(棄牌階段), Freeze(攻擊了別人等回應), Attacked(被攻擊做回應), Idu(以毒攻毒), Immune(免疫)
+var turnStatus; // me 現在在幹嘛? 非 me 的 turn => null. null(not my turn), Nothing(未選牌), Attack(選了牌未攻擊), Discard(棄牌階段), Freeze(攻擊了別人等回應), Attacked(被攻擊做回應), Idu(以毒攻毒), Immune(免疫), Attacked2(被反攻)
 var turnNumber = 0; // turn number (int)
 var turnPlayer = 0; // index of seat of player who is turn (int)
 var timeLeft; // time left for this player to move (milisecond) (int)
 var timeLeftInit = 10000; // time for every player to move (miliseconds) (int)
 var order; // the last order player committed
+var flyingNumbers = []; // (FlyingNumber array)
 
 /* p5 functions */
 function setup(){
@@ -118,7 +119,7 @@ function setup(){
   createP('');
 
   createCanvas(800 +900, 600 +120);
-  publicCards[0] = new Card('E. coli', 4, 'Pathogen');
+  //publicCards[0] = new Card('E. coli', 4, 'Pathogen');
 
   p1 = createP('3 people online');
 
@@ -165,6 +166,9 @@ function draw(){
     seat[i].show();
   }
   StandUpButton.show();
+  for(var i=0; i<flyingNumbers.length; i++){
+    flyingNumbers[i].show();
+  }
   if(!loading)
     Turn.prototype.releaseTurn();
 
@@ -203,7 +207,7 @@ function draw(){
   stroke(0);
   rect(270, 650, 260, 9);
   fill(255, 0, 0);
-  if(turnStatus != null)
+  if(turnStatus != null && turnStatus!='Freeze')
     timeLeft -= 50;
   rect(270, 650, timeLeft/timeLeftInit * 260, 9);
   if(timeLeft < 0 && turnStatus != null && turnStatus != undefined && turnStatus != 'Attacked' && turnStatus != 'Idu' && turnStatus != 'Immune'){

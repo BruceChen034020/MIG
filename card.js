@@ -1,6 +1,6 @@
 /* card
-版本: 1.0.1.3
-2018/8/24
+版本: 1.0.1.5
+2018/8/25
 */
 
 function Card(name, rank, suit, id){ // Class
@@ -23,16 +23,17 @@ function Card(name, rank, suit, id){ // Class
   this.height = 100;
   this.rank = rank;
   this.suit = suit;
-  this.id = id; // ID of this card
+  this.id = id; // ID of this card (int)
   this.selected = false;
   this.gray = false;
-  this.pair = []; // 以毒攻毒
-  this.immune = []; // 免疫
-  this.annotation = ""; // 註解
-  this.annotation2 = ""; // Lymphocyte
-  this.immuneEffective = []; // 免疫生效數字
-  this.media = []; // media for disease
-  this.pathogenType = ""; // pathogen type: bacteria, virus, parasites
+  this.pair = []; // 以毒攻毒 (Card list)
+  this.immune = []; // 免疫 (Card list)
+  this.annotation = ""; // 註解 (String)
+  this.annotation2 = ""; // Lymphocyte (String)
+  this.immuneEffective = []; // 免疫生效數字 (int array)
+  this.media = []; // media for disease (string array)
+  this.pathogenType = ""; // pathogen type: bacteria, virus, parasites (string)
+  this.bigMark = ""; // big mark, 免疫生效用 (string)
 
   /* Functions */
   this.show = function(){ // update screen (void)
@@ -73,23 +74,43 @@ function Card(name, rank, suit, id){ // Class
             this.gray = true;
           }
         }
+        if(turnStatus == 'Discard'){
+          if(this.suit == 'Organ'){
+            this.gray = true;
+          }
+        }
         if(turnStatus == 'Attack'){
           this.gray = false;
         }
         if(turnStatus == null){
           this.gray = false;
         }
-        if(turnStatus == 'Attacked'){
-          if(this.pair == order.card){
+        if(turnStatus == 'Attacked' || turnStatus == 'Attacked2'){
+
+          if(this.pair.includes(publicCards[publicCards.length-1]/*cardList[order.card]*/)){
             this.gray = false;
-          }else if(order.immune == this){
+          }else if(/*cardList[order.card]*/publicCards[publicCards.length-1].immune.includes(this)){
             this.gray = false;
           }else{
             this.gray = true;
           }
         }
       }
-
+    if(this.bigMark == 'V'){
+      textAlign(CENTER);
+      stroke(0, 255, 0);
+      fill(0, 255, 0);
+      textSize(72);
+      text('V', c.x+c.width/2, c.y+c.height/2);
+      return true;
+    }else if(this.bigMark == 'X'){
+      textAlign(CENTER);
+      stroke(255, 0, 0);
+      fill(255, 0, 0);
+      textSize(72);
+      text('X', c.x+c.width/2, c.y+c.height/2);
+      return false;
+    }
   }
   this.contains = function(x, y){
     if(this.x < x && x < this.x+this.width && this.y < y && y < this.y+this.height){
@@ -100,6 +121,9 @@ function Card(name, rank, suit, id){ // Class
   }
   this.mousePressed = function(){
     if(turnStatus == null){ // not my turn
+      return;
+    }
+    if(this.gray == true){
       return;
     }
     if(me.cards.indexOf(this) > -1){
@@ -140,21 +164,27 @@ function Card(name, rank, suit, id){ // Class
           Turn.prototype.nextPlayer();
         }
       }
-      if(turnStatus == "Attacked" && this.gray == false){
+      if((turnStatus == "Attacked" || turnStatus == 'Attacked2') && this.gray == false){
         if(this.suit == 'Pathogen'){
           turnStatus = "Idu";
           timeLeft = timeLeftInit;
+          ConfirmButton.img = loadImage("confirm_red.png");
         }else if(this.suit == 'Disease'){
           turnStatus = "Idu";
           timeLeft = timeLeftInit;
+          ConfirmButton.img = loadImage("confirm_red.png");
         }else if(this.suit == 'Organ'){
 
         }else if(this.suit == 'Immunity'){
           turnStatus = "Immune";
           timeLeft = timeLeftInit;
+          ConfirmButton.img = loadImage("confirm_red.png");
         }else{
 
         }
+        this.selected = true;
+        order.card = this;
+        order.player = seat[order.srcSeatNumber].player;
       }
     }
   }

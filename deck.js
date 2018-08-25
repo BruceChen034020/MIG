@@ -1,5 +1,6 @@
 /*
-版本: 1.0.0.10
+版本: 1.0.1.5
+2018/8/25
 */
 
 function Deck(){
@@ -18,6 +19,7 @@ Deck.prototype.shuffle = function(a){
     a[i] = a[j];
     a[j] = x;
   }
+
   Deck.prototype.update();
 }
 
@@ -29,10 +31,11 @@ Deck.prototype.pop = function(cards, update){
   return p;
 }
 
-Deck.prototype.add = function(deck, card){
-  deck.push(card);
+Deck.prototype.add = function(deck, cards){
+  for(var i=0; i<cards.length; i++)
+    deck.push(cards[i]);
+
   Deck.prototype.shuffle(deck);
-  Deck.prototype.update();
 }
 
 Deck.prototype.deal = function(deck, player, numCard){ // 發牌
@@ -43,6 +46,16 @@ Deck.prototype.deal = function(deck, player, numCard){ // 發牌
     player.cards[i+n] = Deck.prototype.pop(deck, false);
   }
   Deck.prototype.update();
+}
+
+Deck.prototype.clearPublic = function(publicCard, deck, update){ // 將所有 public card 放回抽牌區
+
+  if(update)
+    Deck.prototype.add(deck, publicCard);
+  for(var i=0; i<publicCards.length; i++){
+    publicCards[i].x_dst = publicCards[i].y_dst = 0;
+  }
+  setTimeout(function(){publicCards = [];}, 1000);
 }
 
 Deck.prototype.update = function(){ // update the deck information on server

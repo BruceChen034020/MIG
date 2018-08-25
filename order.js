@@ -1,14 +1,14 @@
 /*
-版本: 1.0.1.3
-2018/8/24
+版本: 1.0.1.5
+2018/8/25
 */
 
 function Order(card, player, other, srcSeatNumber){
   /* Attrubutes */
-  this.card = card;
-  this.player = player;
-  this.other = other; // other information
-  this.srcSeatNumber = srcSeatNumber;
+  this.card = card; // (Card) before request sent or (int) after request received
+  this.player = player; // (Player) before request sent or (int) after request received
+  this.other = other; // other information (string)
+  this.srcSeatNumber = srcSeatNumber; // source seat number (int)
 
   /* Initializer */
 

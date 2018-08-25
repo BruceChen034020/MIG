@@ -262,6 +262,7 @@ for(i=0; i<=191; i++){
 
 cardList_pair(c);
 cardList_media(c);
+
 cardList_immune(c);
 
 return c;
@@ -462,38 +463,39 @@ function cardList_pair(c){
 function cardList_immune(c){
   for(var i=0; i<c.length; i++){
     if(c[i].suit == "Pathogen"){
-      c[i].immune += [c[7], c[14], c[23], c[26], c[30], c[44], c[50], c[55],
-                      c[58]];
+      c[i].immune.push(c[7], c[23], c[26], c[30], c[44], c[50], c[55],
+                      c[58]);
       if(c[i].pathogenType == "Bacteria"){
-        c[i].immune += [c[47], c[133], c[17], c[19], c[32]];
+        c[i].immune.push(c[47], c[133], c[17], c[19], c[32]);
       }
       if(c[i].pathogenType == "Parasites"){
-        c[i].immune += [c[53]];
+        c[i].immune.push(c[53]);
       }
       if(c[i].pathogenType == "Virus"){
-        c[i].immune += [c[61], c[144]];
+        c[i].immune.push(c[61], c[144], c[14]);
       }
       if(c[i].media != "Arthropod"){
-        c[i].immune += [c[64]];
+        c[i].immune.push(c[64]);
       }
       if(c[i].media == "Soil" || c[i].media == "Contact"){
-        c[i].immune += [c[129]];
+        c[i].immune.push(c[129]);
       }
     }
   }
+
   for(var i=166; i<=175; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
-        c[i].pair[j].immune += [c[129]];
+        c[i].pair[j].immune.push(c[129]);
       }
     }
   }
   for(var i=25; i<=72; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){ // stomach and intestines
-        c[i].pair[j].immune += [c[21]];
+        c[i].pair[j].immune.push(c[21]);
         if(i!=72){ // intestines
-          c[i].pair[j].immune += [c[34], c[41], c[36], c[39]];
+          c[i].pair[j].immune.push(c[34], c[41], c[36], c[39]);
         }
       }
     }
@@ -501,25 +503,25 @@ function cardList_immune(c){
   for(var i=52; i<=70; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
-        c[i].pair[j].immune += [c[129]];
+        c[i].pair[j].immune.push(c[129]);
       }
     }
   }
-  c[2].immune += [c[138]];
-  c[80].immune += [c[141]];
-  c[86].immune += [c[136]];
+  c[2].immune.push(c[138]);
+  c[80].immune.push(c[141]);
+  c[86].immune.push(c[136]);
   for(var i=98; i<=102; i++){ // lung
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
-        c[i].pair[j].immune += [c[141], c[87]];
+        c[i].pair[j].immune.push(c[141], c[87]);
       }
     }
   }
-  c[106].immune += [c[87]];
+  c[106].immune.push(c[87]);
   for(var i=108; i<=124; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
-        c[i].pair[j].immune += [c[136]];
+        c[i].pair[j].immune.push(c[136]);
       }
     }
   }
@@ -527,15 +529,15 @@ function cardList_immune(c){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
         if(i!=172)
-          c[i].pair[j].immune += [c[160]];
+          c[i].pair[j].immune.push(c[160]);
       }
     }
   }
-  c[162].immune += [c[163]];
+  c[162].immune.push(c[163]);
   for(var i=177; i<=182; i++){
     if(c[i].suit == "Disease"){
       for(var j=0; j<c[i].pair.length; j++){
-        c[i].pair[j].immune += [c[163]];
+        c[i].pair[j].immune.push(c[163]);
       }
     }
   }

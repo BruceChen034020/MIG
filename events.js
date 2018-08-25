@@ -1,6 +1,6 @@
 /* events
-版本: 1.0.1.4
-2018/8/24
+版本: 1.0.1.5
+2018/8/25
 */
 
 /* Timed Events */
@@ -197,6 +197,7 @@ function gotData4(data){ // value turn (void)
   if(playing){
 
     if(dt['player'] == me.seat.id){ // my turn
+      Deck.prototype.clearPublic(publicCards, deck, true);
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
       Deck.prototype.deal(deck, me, 2);
@@ -207,6 +208,7 @@ function gotData4(data){ // value turn (void)
         seat[i].selected = false;
       }
     }else{
+      Deck.prototype.clearPublic(publicCards, deck, false);
       timeLeft = 0;
       turnStatus = null;
     }
@@ -234,27 +236,43 @@ function gotData5(data){ // value order (void)
     me.cards.splice(index, 1);
     publicCards.push(cardList[dt.Card]);
   }else{
-    console.log(seat[2]);
-    console.log(seat[dt.srcSeatNumber]);
+
     srcPointX = seat[dt.srcSeatNumber].x;
     srcPointY = seat[dt.srcSeatNumber].y;
     c = cardList[dt.Card];
-    console.log(srcPointX, srcPointY);
+
     c.x = srcPointX - c.width/2;
     c.y = srcPointY - c.height/2;
     publicCards.push(c);
   }
-  if(dt['Player'] == me.seat.id){
-    if(turnStatus == null){
-      turnStatus = 'Attacked';
-      timeLeft = timeLeftInit;
+
+  if(dt.Other == 'Attack'){
+    if(dt['Player'] == me.seat.id){
+      if(turnStatus == null){
+        turnStatus = 'Attacked';
+        timeLeft = timeLeftInit;
+      }
+    }
+    if(turnStatus == 'Attacked'){
+
     }
   }
-  if(dt.Other == 'Attack'){
-
-
+  if(dt.Other == 'ImmuneDeal'){
+    if(dt.Effective){
+      publicCards[publicCards.length-2].bigMark = 'V';
+    }else{
+      publicCards[publicCards.length-2].bigMark = 'X';
+    }
+    setTimeout(Deck.prototype.clearPublic(publicCards, deck, false), 1000);
   }
-
+  if(dt.Other == 'Counter_Attack'){
+    if(dt['Player'] == me.seat.id){
+      if(turnStatus == null){
+        turnStatus = 'Attacked2';
+        timeLeft = timeLeftInit;
+      }
+    }
+  }
 }
 
 function errData5(err){ // value (void)
@@ -262,18 +280,24 @@ function errData5(err){ // value (void)
   console.log(err);
 }
 
-function gotData6(data){ // value order (void)
+function gotData6(data){ // value blood (void)
   console.log('value blood');
   if(loading){
     return;
   }
   var dt = data.val();
   for(var j=0; j<player.length; j++){
+
+    if(dt[player[j].ip] != player[j].blood){ // 特效
+      var s = (dt[player[j].ip] - player[j].blood).toString();
+      flyingNumbers.push(new FlyingNumber(s, player[j].seat.x, player[j].seat.y + player[j].seat.w/2 + 30, 12, 255, 0, 0, 255, 0, 0, 0, -5, 10));
+    }
     player[j].blood = dt[player[j].ip];
   }
   if(dt.Ip != ip){
     Turn.prototype.nextPlayer();
   }
+  Deck.prototype.clearPublic(publicCards, deck, false);
 }
 
 function errData6(err){ // value (void)

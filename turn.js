@@ -75,8 +75,7 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
     return "";
   }
   if(turnStatus == 'Attacked'){
-    console.log(order.srcSeatNumber);
-    console.log(seat[order.srcSeatNumber]);
+
     return (seat[order.srcSeatNumber].player.name) + " 對你使用了 Pathogen, 請以毒攻毒或使用免疫";
   }
   if(turnStatus == 'Idu'){
@@ -84,6 +83,9 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
   }
   if(turnStatus == 'Immune'){
     return "使用免疫";
+  }
+  if(turnStatus == 'Attacked2'){
+    return "對方使用以毒攻毒之術反攻了, 快想辦法吧!";
   }
   if(turnStatus == null){ // not my turn
     return 'null';
