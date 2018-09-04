@@ -1,6 +1,6 @@
 /* events
 版本: 1.0.1.5
-2018/8/25
+2018/9/4
 */
 
 /* Timed Events */
@@ -264,6 +264,8 @@ function gotData5(data){ // value order (void)
       publicCards[publicCards.length-2].bigMark = 'V';
     }else{
       publicCards[publicCards.length-2].bigMark = 'X';
+      if(turnStatus == 'Freeze')
+        setTimeout(Turn.prototype.nextPlayer(), 1000);
     }
     setTimeout(Deck.prototype.clearPublic(publicCards, deck, false), 1000);
   }
@@ -310,7 +312,7 @@ function gotData6(data){ // value blood (void)
       setTimeout(function(){alert('Game over!');}, 3000);
     }
   }
-  if(dt.Ip != ip){ ********--------
+  if(dt.Ip == ip){
     Turn.prototype.nextPlayer();
   }
   Deck.prototype.clearPublic(publicCards, deck, false);
