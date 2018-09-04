@@ -1,5 +1,5 @@
 /*
-版本: 1.0.1.7
+版本: 1.0.1.9
 2018/9/4
 */
 
@@ -75,7 +75,7 @@ function SquareButton(x, y, img, width, height, action){
                     Other: ord.Other,
                     Time: d.toString()}
         ref.set(data);
-        turnStatus = null;
+        //turnStatus = null;
       }
       if(turnStatus == 'Immune'){
         if(order.card.annotation2 == "Lymphocyte"){
