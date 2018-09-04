@@ -1,9 +1,9 @@
 /*
 1.0.1.6
-2018/8/25
+2018/9/4
 */
 function immuneDeal(){ // 抽牌判斷是否有效
-  if(order.other == "Immune")
+  //if(order.other == "Immune")
     order.other = 'ImmuneDeal';
   order.card.selected = false;
 
