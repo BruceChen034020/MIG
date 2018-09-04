@@ -272,7 +272,7 @@ function gotData5(data){ // value order (void)
   }
   if(dt.Other == 'Counter_Attack'){ // 有人出以毒攻毒
     if(dt['Player'] == me.seat.id){
-      if(turnStatus == 'Freeze' || turnStatus == 'Attacked' || turnStatus == null){
+      if(turnStatus == 'Freeze' || turnStatus == 'Attacked'){
         turnStatus = 'Attacked2';
         timeLeft = timeLeftInit;
       }
