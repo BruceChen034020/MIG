@@ -101,6 +101,13 @@ function Card(name, rank, suit, id){ // Class
             this.gray = true;
           }
         }
+        if(turnStatus == 'Immune+'){
+          if(this.id == 10){
+            this.gray = false;
+          }else{
+            this.gray = true;
+          }
+        }
       }
     if(this.bigMark == 'V'){
       textAlign(CENTER);
@@ -193,6 +200,12 @@ function Card(name, rank, suit, id){ // Class
         this.selected = true;
         order.card = this;
         order.player = seat[order.srcSeatNumber].player;
+      }
+      if(turnStatus == 'Immune+'){
+        if(this.gray == false){
+          this.selected = true;
+          order.card.annatation2 += "EE";
+        }
       }
     }
   }

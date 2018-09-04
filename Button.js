@@ -74,6 +74,10 @@ function SquareButton(x, y, img, width, height, action){
         turnStatus = null;
       }
       if(turnStatus == 'Immune'){
+        if(order.card.annotation2 == "Lymphocyte"){
+          turnStatus = "Immune+";
+          return;
+        }
         order.other = 'Immune';
         order.card.selected = false;
         order.player.seat.selected = false;
@@ -90,10 +94,26 @@ function SquareButton(x, y, img, width, height, action){
         ref.set(data);
         setTimeout(immuneDeal, 1000);
       }
+      if(this.turnStatus == "Immune+"){
+        order.other = 'Immune+';
+        cardList[10].selected = false;
+        order.player.seat.selected = false;
+        console.log(order);
+        ord = order.toDict();
+
+        var ref = database.ref('order');
+        var data = {Ip: ip,
+                    Name: localStorage.getItem('name'),
+                    srcSeatNumber: me.seat.id,
+                    Card: ord.Card,
+                    Player: ord.Player,
+                    Other: ord.Other}
+        ref.set(data);
+      }
       ConfirmButton.img = loadImage("confirm.png");
     }
     if(this.action == 'end'){
-      if(turnStatus == 'Attacked' || turnStatus=='Idu' || turnStatus=='Immune' || turnStatus=='Attacked2'){
+      if(turnStatus == 'Attacked' || turnStatus=='Idu' || turnStatus=='Immune' || turnStatus=='Attacked2' || turnStatus=='Immune+'){
 
         me.reduceBlood(1);
       }else{
@@ -112,6 +132,10 @@ function SquareButton(x, y, img, width, height, action){
       }
       turnStatus = 'Nothing';
       timeLeft = timeLeftInit;
+      if(turnStatus == 'Immune+'){
+        turnStatus = 'Immune';
+        ConfirmButton.mousePressed();
+      }
       for(var i=0; i<me.cards.length; i++){
         me.cards[i].selected = false;
       }

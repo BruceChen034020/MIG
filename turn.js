@@ -87,6 +87,9 @@ Turn.prototype.MessageText = function(){ // return the text showing the message 
   if(turnStatus == 'Attacked2'){
     return "對方使用以毒攻毒之術反攻了, 快想辦法吧!";
   }
+  if(turnStatus == 'Immune+'){
+    return "是否使用 helper cell 加持?";
+  }
   if(turnStatus == null){ // not my turn
     return 'null';
   }

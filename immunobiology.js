@@ -3,14 +3,15 @@
 2018/8/25
 */
 function immuneDeal(){ // 抽牌判斷是否有效
-  order.other = 'ImmuneDeal';
+  if(order.other == "Immune")
+    order.other = 'ImmuneDeal';
   order.card.selected = false;
 
   ord = order; // 不用 toDict
 
   /* 抽牌 */
   var c = Deck.prototype.pop(deck, true);
-  var b = immuneDecision(cardList[order.card].immuneEffective, c.rank);
+  var b = immuneDecision(cardList[order.card].immuneEffective, c.rank, c);
   var ref = database.ref('order');
   var data = {Ip: ip,
               Name: localStorage.getItem('name'),
@@ -28,6 +29,9 @@ function immuneDeal(){ // 抽牌判斷是否有效
 
 function immuneDecision(effectiveNumber, randomNumber, immuneCard){ // 是否有效 (bool). effectiveNumber(int array), randomNumber(int)
   var c = immuneCard;
+  if(c.annatation2.includes("EE")){
+    return true;
+  }
   if(effectiveNumber.includes(randomNumber)){
     return true;
   }else{

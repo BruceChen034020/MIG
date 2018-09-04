@@ -248,7 +248,7 @@ function gotData5(data){ // value order (void)
     publicCards.push(c);
   }
 
-  if(dt.Other == 'Attack'){
+  if(dt.Other == 'Attack'){ // 有人出 pathogen
     if(dt['Player'] == me.seat.id){
       if(turnStatus == null){
         turnStatus = 'Attacked';
@@ -259,7 +259,7 @@ function gotData5(data){ // value order (void)
 
     }
   }
-  if(dt.Other == 'ImmuneDeal'){
+  if(dt.Other == 'ImmuneDeal'){ // 有人出免疫且已抽判定牌
     if(dt.Effective){
       publicCards[publicCards.length-2].bigMark = 'V';
     }else{
@@ -267,13 +267,24 @@ function gotData5(data){ // value order (void)
     }
     setTimeout(Deck.prototype.clearPublic(publicCards, deck, false), 1000);
   }
-  if(dt.Other == 'Counter_Attack'){
+  if(dt.Other == 'Counter_Attack'){ // 有人出以毒攻毒
     if(dt['Player'] == me.seat.id){
       if(turnStatus == null){
         turnStatus = 'Attacked2';
         timeLeft = timeLeftInit;
       }
     }
+  }
+  if(dt.Other == 'Immune+'){ // 有人出免疫且有加 helper
+    srcPointX = seat[dt.srcSeatNumber].x;
+    srcPointY = seat[dt.srcSeatNumber].y;
+    c = cardList[10];
+
+    c.x = srcPointX - c.width/2;
+    c.y = srcPointY - c.height/2;
+    setTimeout(publicCards.push(c), 500);
+    publicCards[publicCards.length-2].bigMark = 'V';
+    setTimeout(Deck.prototype.clearPublic(publicCards, deck, false), 1500);
   }
 }
 
@@ -295,8 +306,11 @@ function gotData6(data){ // value blood (void)
       flyingNumbers.push(new FlyingNumber(s, player[j].seat.x, player[j].seat.y + player[j].seat.w/2 + 30, 12, 255, 0, 0, 255, 0, 0, 0, -5, 10));
     }
     player[j].blood = dt[player[j].ip];
+    if(player[j].blood == 0){
+      setTimeout(function(){alert('Game over!');}, 3000);
+    }
   }
-  if(dt.Ip != ip){
+  if(dt.Ip != ip){ ********--------
     Turn.prototype.nextPlayer();
   }
   Deck.prototype.clearPublic(publicCards, deck, false);

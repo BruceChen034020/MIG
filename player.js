@@ -41,9 +41,9 @@ function Player(){ // Class
     }
   }
   this.reduceBlood = function(loss){ // 扣血並更新 server
-    console.log(this.blood);
+    
     this.blood -= loss;
-    console.log(this.blood)
+    
     if(this.blood <=0){
       // game over
     }
@@ -51,12 +51,12 @@ function Player(){ // Class
     for(var i=0; i<player.length; i++){
       Blood[player[i].ip] = player[i].blood;
     }
-    console.log(Blood)
+
     this.blood += loss; // 為了讓特效出來
     var d = new Date();
     Blood['Time'] = d.toString();
     var ref = database.ref('blood');
-console.log(Blood)
+
     ref.set(Blood);
     turnStatus = null;
     Deck.prototype.clearPublic(publicCards, deck, true);
