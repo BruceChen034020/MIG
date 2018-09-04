@@ -153,7 +153,7 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-  
+if(playing) me.printCards()
   frameRate(10);
   background(255);
   fill(0, 64, 0);
