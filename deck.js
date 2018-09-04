@@ -1,5 +1,5 @@
 /*
-版本: 1.0.1.5
+版本: 1.0.1.8
 2018/8/25
 */
 
@@ -11,7 +11,7 @@ function Deck(){
   /* Functions */
 }
 
-Deck.prototype.shuffle = function(a){
+Deck.prototype.shuffle = function(a){ console.log('shuffle')
   var j, x, i;
   for (i = a.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
@@ -23,7 +23,7 @@ Deck.prototype.shuffle = function(a){
   Deck.prototype.update();
 }
 
-Deck.prototype.pop = function(cards, update){
+Deck.prototype.pop = function(cards, update){ console.log('pop')
   p = cards.pop();
 
   if(update)
@@ -31,7 +31,7 @@ Deck.prototype.pop = function(cards, update){
   return p;
 }
 
-Deck.prototype.add = function(deck, cards){
+Deck.prototype.add = function(deck, cards){ console.log('add')
   for(var i=0; i<cards.length; i++)
     deck.push(cards[i]);
 
@@ -39,7 +39,7 @@ Deck.prototype.add = function(deck, cards){
 }
 
 Deck.prototype.deal = function(deck, player, numCard){ // 發牌
-
+console.log('deal')
   var n = player.cards.length;
   for(var i=0; i<numCard; i++){
 
@@ -49,7 +49,7 @@ Deck.prototype.deal = function(deck, player, numCard){ // 發牌
 }
 
 Deck.prototype.clearPublic = function(publicCards, deck, update){ // 將所有 public card 放回抽牌區
-
+console.log('clear public', update)
   if(update)
     Deck.prototype.add(deck, publicCards);
   for(var i=0; i<publicCards.length; i++){
@@ -61,13 +61,13 @@ Deck.prototype.clearPublic = function(publicCards, deck, update){ // 將所有 p
 
 Deck.prototype.clearPublic2 = function(){publicCards = [];}
 
-Deck.prototype.washCards = function(){ // wash away all marks
+Deck.prototype.washCards = function(){ console.log('wash cards')// wash away all marks
   for(var i=0; i<deck.length; i++){
     deck[i].bigMark = "";
   }
 }
 
-Deck.prototype.update = function(){ // update the deck information on server
+Deck.prototype.update = function(){ console.log('update')// update the deck information on server
   var l = [];
 
   for(var i=0; i<deck.length; i++){
@@ -87,7 +87,7 @@ Deck.prototype.update = function(){ // update the deck information on server
   ref.set(data);
 }
 
-Deck.prototype.copy = function(deck){
+Deck.prototype.copy = function(deck){ console.log('copy')
   var d = [];
   for(i=0; i<deck.length; i++){
     d[i] = deck[i];
@@ -95,7 +95,7 @@ Deck.prototype.copy = function(deck){
   return d;
 }
 
-function Deck_init(){
+function Deck_init(){ console.log('deck init')
   d = Deck.prototype.copy(cardList);
   Deck.prototype.shuffle(d);
 
@@ -108,4 +108,39 @@ Deck.prototype.printSequence = function(){
     str += deck[i].id + " ";
   }
   console.log(str);
+}
+
+Deck.prototype.check = function(){ // check if there is repeating cards or missing cards
+  var count = [];
+  for(var i=0; i<192; i++){
+    count[i] = 0;
+  }
+  for(var i=0; i<deck.length; i++){
+    count[deck[i].id]++;
+  }
+  for(var i=0; i<publicCards.length; i++){
+    count[publicCards[i].id]++;
+  }
+  for(var i=0; i<player.length; i++){
+    for(var j=0; j<player[i].cards.length; j++){
+      count[player[i].cards[j].id]++;
+    }
+  }
+  for(var i=0; i<192; i++){
+    if(count[i] != 1){
+      console.log(i + ' repeating ' + count[i] + ' times.');
+    }
+  }
+  console.log('public cards');
+  var s = ""
+  for(var i=0; i<publicCards.length; i++){
+    s += publicCards[i].id + ' ';
+  }
+  console.log(s);
+  console.log('deck cards');
+  var s = ""
+  for(var i=0; i<deck.length; i++){
+    s += deck[i].id + ' ';
+  }
+  console.log(s);
 }

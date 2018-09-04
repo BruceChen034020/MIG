@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.1.5
+版本: 1.0.1.8
 2018/9/4
 */
 
@@ -174,6 +174,7 @@ function errData2(err){ // value (void)
 }
 
 function gotData3(data){ // value deck (void)
+  console.log('got value deck')
   var dt = data.val();
   deck = [];
   for(var i=0; i<dt.Count; i++){

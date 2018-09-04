@@ -6,7 +6,7 @@
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
 最後修改日期: 2018/9/4
-版本: 1.0.1.7
+版本: 1.0.1.8
 發表於: https://brucechen034020.github.io/
 程式碼尺度
   N/A
@@ -153,7 +153,8 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-if(playing) me.printCards()
+//if(playing) me.printCards()
+//Deck.prototype.check();
   frameRate(10);
   background(255);
   fill(0, 64, 0);

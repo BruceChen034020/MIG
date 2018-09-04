@@ -1,5 +1,5 @@
 /*
-1.0.1.7
+1.0.1.8
 2018/9/4
 */
 function immuneDeal(){ // 抽牌判斷是否有效
@@ -8,7 +8,7 @@ function immuneDeal(){ // 抽牌判斷是否有效
   order.card.selected = false;
 
   ord = order; // 不用 toDict
-console.log('line 11'); consoel.log(ord.other)
+console.log('line 11'); console.log(ord.other)
   /* 抽牌 */
   var c = Deck.prototype.pop(deck, true);
   var b = immuneDecision(cardList[order.card].immuneEffective, c.rank, c);
@@ -31,7 +31,7 @@ console.log('line 26')
 
 function immuneDecision(effectiveNumber, randomNumber, immuneCard){ // 是否有效 (bool). effectiveNumber(int array), randomNumber(int)
   var c = immuneCard;
-  if(c.annatation2.includes("EE")){
+  if(c.annotation2.includes("EE")){
     return true;
   }
   if(effectiveNumber.includes(randomNumber)){
