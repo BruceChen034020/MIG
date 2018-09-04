@@ -1,5 +1,5 @@
 /* events
-版本: 1.0.1.8
+版本: 1.0.1.10
 2018/9/4
 */
 
@@ -272,7 +272,7 @@ function gotData5(data){ // value order (void)
   }
   if(dt.Other == 'Counter_Attack'){ // 有人出以毒攻毒
     if(dt['Player'] == me.seat.id){
-      if(turnStatus == 'Freeze' || turnStatus == 'Attacked'){
+      if(turnStatus == 'Freeze' || turnStatus == 'Attacked' || turnStatus == null){
         turnStatus = 'Attacked2';
         timeLeft = timeLeftInit;
       }
