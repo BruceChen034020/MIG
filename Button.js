@@ -1,6 +1,6 @@
 /*
-版本: 1.0.1.5
-2018/8/25
+版本: 1.0.1.7
+2018/9/4
 */
 
 function SquareButton(x, y, img, width, height, action){
@@ -47,12 +47,14 @@ function SquareButton(x, y, img, width, height, action){
         ord = order.toDict();
 
         var ref = database.ref('order');
+        var d = new Date();
         var data = {Ip: ip,
                     Name: localStorage.getItem('name'),
                     srcSeatNumber: me.seat.id,
                     Card: ord.Card,
                     Player: ord.Player,
-                    Other: ord.Other}
+                    Other: ord.Other,
+                    Time: d.toString()}
         ref.set(data);
         turnStatus = 'Freeze';
       }
@@ -64,12 +66,14 @@ function SquareButton(x, y, img, width, height, action){
         ord = order.toDict();
 
         var ref = database.ref('order');
+        var d = new Date();
         var data = {Ip: ip,
                     Name: localStorage.getItem('name'),
                     srcSeatNumber: me.seat.id,
                     Card: ord.Card,
                     Player: ord.Player,
-                    Other: ord.Other}
+                    Other: ord.Other,
+                    Time: d.toString()}
         ref.set(data);
         turnStatus = null;
       }
@@ -85,12 +89,14 @@ function SquareButton(x, y, img, width, height, action){
         ord = order.toDict();
 
         var ref = database.ref('order');
+        var d = new Date();
         var data = {Ip: ip,
                     Name: localStorage.getItem('name'),
                     srcSeatNumber: me.seat.id,
                     Card: ord.Card,
                     Player: ord.Player,
-                    Other: ord.Other}
+                    Other: ord.Other,
+                    Time: d.toString()}
         ref.set(data);
         setTimeout(immuneDeal, 1000);
       }
@@ -102,11 +108,13 @@ function SquareButton(x, y, img, width, height, action){
         ord = order.toDict();
 
         var ref = database.ref('order');
+        var d = new Date();
         var data = {Ip: ip,
                     Name: localStorage.getItem('name'),
                     srcSeatNumber: me.seat.id,
                     Card: ord.Card,
                     Player: ord.Player,
+                    Time: d.toString(),
                     Other: ord.Other}
         ref.set(data);
       }
