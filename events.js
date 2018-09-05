@@ -313,7 +313,7 @@ function gotData6(data){ // value blood (void)
       setTimeout(function(){alert('Game over!');}, 3000);
     }
   }
-  if(dt.Ip != ip && turnStatus != null){
+  if(dt.Ip != ip && order.srcSeatNumber == me.seat.id){
     Turn.prototype.nextPlayer();
   }
   Deck.prototype.clearPublic(publicCards, deck, false);
