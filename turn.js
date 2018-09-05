@@ -47,7 +47,7 @@ Turn.prototype.nextPlayer = function(){
 }
 
 Turn.prototype.gameStart = function(){
-
+console.log('game start!')
   turnNumber = 0;
   turnPlayer = 0;
   Turn.prototype.nextPlayer();

@@ -95,7 +95,7 @@ console.log(onlineList)
   if(onlineList.length == 0){
     console.log('Game start!');
     deck = Deck_init();
-    Turn.prototype.gameStart();
+    setTimeout(Turn.prototype.gameStart, 1000);
   }
 }
 
@@ -189,6 +189,7 @@ function errData3(err){ // value (void)
 }
 
 function gotData4(data){ // value turn (void)
+  console.log('value turn');
   var dt = data.val();
   if(loading){
     turnNumber = dt['turnNumber'];

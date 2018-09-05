@@ -153,7 +153,7 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-  console.log(turnStatus)
+  console.log(turnNumber)
 //if(playing) me.printCards()
 //Deck.prototype.check();
   frameRate(10);
