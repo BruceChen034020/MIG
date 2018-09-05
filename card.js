@@ -1,6 +1,6 @@
 /* card
-版本: 1.0.1.7
-2018/8/25
+版本: 1.0.1.11
+2018/9/6
 */
 
 function Card(name, rank, suit, id){ // Class
@@ -51,6 +51,8 @@ function Card(name, rank, suit, id){ // Class
       text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 - 30);
     }else if(this.name.length > 70){
       text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 - 15);
+    }else if(this.name.length > 40){
+      text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 - 5);
     }else{
       text(this.name, this.x + this.width * 0.5, this.y + this.height * 0.5 + 6);
     }
