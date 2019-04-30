@@ -1,6 +1,6 @@
 /*
-版本: 1.0.1.8
-2018/8/25
+版本: 1.1.0.0
+2019/4/29
 */
 
 function Deck(){
@@ -40,6 +40,7 @@ Deck.prototype.add = function(deck, cards){ console.log('add')
 
 Deck.prototype.deal = function(deck, player, numCard){ // 發牌
 console.log('deal')
+
   var n = player.cards.length;
   for(var i=0; i<numCard; i++){
 

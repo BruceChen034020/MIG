@@ -1,5 +1,6 @@
+/* 2019/5/1 */
 function CardList_init(){
-  c = [];
+  var c = [];
   c[0] = new Card("Leprosy / Hansen disease (HD)", 1, "Disease", 0);
 c[1] = new Card("Streptococcal TSS (STSS)", 2, "Disease", 1);
 c[2] = new Card("Neonatal conjunctivitis / Ophthalmia\r\nof the newborn", 3, "Disease", 2);
@@ -264,6 +265,14 @@ cardList_pair(c);
 cardList_media(c);
 
 cardList_immune(c);
+
+for(i=0; i<=191; i++){
+
+  if(c[i].suit == "Pathogen"){
+
+    c.push(c[i].copy(c.length+1));
+  }
+}
 
 return c;
 

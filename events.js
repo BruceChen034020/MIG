@@ -1,6 +1,6 @@
 /* events
-版本: 1.0.1.11
-2018/9/5
+版本: 1.1.0.0
+2019/4/29
 */
 
 /* Timed Events */
@@ -91,7 +91,7 @@ function gotData1(data){ // value online (void)
 
     }
   }
-console.log(onlineList)
+
   if(onlineList.length == 0){
     console.log('Game start!');
     deck = Deck_init();
@@ -204,6 +204,7 @@ function gotData4(data){ // value turn (void)
       timeLeft = timeLeftInit;
       turnStatus = "Nothing";
       Deck.prototype.deal(deck, me, 2);
+      me.SendOrgan();
       for(var i=0; i<me.cards.length; i++){
         me.cards[i].selected = false;
       }

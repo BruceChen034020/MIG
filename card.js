@@ -1,6 +1,6 @@
 /* card
-版本: 1.0.1.11
-2018/9/6
+版本: 1.1.0.0
+2019/4/30
 */
 
 function Card(name, rank, suit, id){ // Class
@@ -36,6 +36,28 @@ function Card(name, rank, suit, id){ // Class
   this.bigMark = ""; // big mark, 免疫生效用 (string)
 
   /* Functions */
+  this.copy = function(id){ // copy a card; need to input new id (Card)
+    var c = new Card();
+    c.name = this.name;
+    c.x = c.x_dst = this.x;
+    c.y = c.y_dst = this.y;
+    c.width = this.width;
+    c.height = this.height;
+    c.rank = this.rank;
+    c.suit = this.suit;
+    c.id = id; // ID of c card (int)
+    c.selected = this.selected;
+    c.gray = this.gray;
+    c.pair = this.pair; // 以毒攻毒 (Card list)
+    c.immune = this.immune; // 免疫 (Card list)
+    c.annotation = this.annotation; // 註解 (String)
+    c.annotation2 = this.annotation2; // Lymphocyte (String)
+    c.immuneEffective = this.immuneEffective; // 免疫生效數字 (int array)
+    c.media = this.media; // media for disease (string array)
+    c.pathogenType = this.pathogenType; // pathogen type: bacteria, virus, parasites (string)
+    c.bigMark = this.bigMark; // big mark, 免疫生效用 (string)
+    return c;
+  }
   this.show = function(){ // update screen (void)
     if(this.gray){
       stroke(0);

@@ -1,6 +1,6 @@
 /*
-版本: 1.0.1.5
-2018/8/25
+版本: 1.1.0.0
+2019/4/29
 */
 function Player(){ // Class
   /* Attributes */
@@ -12,6 +12,7 @@ function Player(){ // Class
   this.sex; // sex (int) 1=male 2=female
   this.profile; // profile picture
   this.blood = 5; // 血
+  this.susceptibleOrgans = []; // susceptible organs (string list)
 
   /* Initializer */
   var r = random(1);
@@ -23,6 +24,7 @@ function Player(){ // Class
     this.profile = male;
   }
   Deck.prototype.deal(deck, this, 5);
+
 
   /* Functions */
   this.printCards = function(){
@@ -41,9 +43,9 @@ function Player(){ // Class
     }
   }
   this.reduceBlood = function(loss){ // 扣血並更新 server
-    
+
     this.blood -= loss;
-    
+
     if(this.blood <=0){
       // game over
     }
@@ -61,6 +63,22 @@ function Player(){ // Class
     turnStatus = null;
     Deck.prototype.clearPublic(publicCards, deck, true);
   }
+  this.SendOrgan = function(){ // If I get an organ, I should send it to the top of my seat
+    // this is for 'me' only. Do not use it to other players.
+
+    for(var i=0; i<this.cards.length; i++){
+
+      if(this.cards[i].suit == 'Organ'){
+
+        this.susceptibleOrgans.push(this.cards[i].name);
+        var index = i;
+        this.cards.splice(index, 1);
+        publicCards.push(this.cards[i]);
+      }
+    }
+  }
+  //this.SendOrgan(); // part of initialization
+  console.log('new player')
 }
 
 Player.prototype.Contains = function(list, ip){ // player list, string
