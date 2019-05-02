@@ -1,4 +1,4 @@
-/* 2019/5/1 */
+/* 2019/5/2 */
 function CardList_init(){
   var c = [];
   c[0] = new Card("Leprosy / Hansen disease (HD)", 1, "Disease", 0);
@@ -270,7 +270,7 @@ for(i=0; i<=191; i++){
 
   if(c[i].suit == "Pathogen"){
 
-    c.push(c[i].copy(c.length+1));
+    c.push(c[i].copy(c.length));
   }
 }
 

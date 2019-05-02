@@ -1,6 +1,6 @@
 /*
 版本: 1.1.0.0
-2019/4/29
+2019/5/2
 */
 function Player(){ // Class
   /* Attributes */
@@ -42,6 +42,7 @@ function Player(){ // Class
       return false;
     }
   }
+
   this.reduceBlood = function(loss){ // 扣血並更新 server
 
     this.blood -= loss;
@@ -69,16 +70,58 @@ function Player(){ // Class
     for(var i=0; i<this.cards.length; i++){
 
       if(this.cards[i].suit == 'Organ'){
-
-        this.susceptibleOrgans.push(this.cards[i].name);
-        var index = i;
-        this.cards.splice(index, 1);
-        publicCards.push(this.cards[i]);
+        setTimeout(function(){
+          this.susceptibleOrgans.push(this.cards[i].name);
+          var index = i;
+          this.cards.splice(index, 1);
+          publicCards.push(this.cards[i]);
+        }, 2000);
       }
     }
+    var ref = database.ref('susceptibleOrgans/');
+    var d = new Date();
+    var s1 = '';
+    var s2 = '';
+    var s3 = '';
+    var s4 = '';
+    if(seat1.player != undefined){
+      s1 = seat1.player.susceptibleOrgansString();
+    }
+    if(seat2.player != undefined){
+      s2 = seat2.player.susceptibleOrgansString();
+    }
+    if(seat3.player != undefined){
+      s3 = seat3.player.susceptibleOrgansString();
+    }
+    if(seat4.player != undefined){
+      s4 = seat4.player.susceptibleOrgansString();
+    }
+    var data = {
+      s1: s1,
+      s2: s2,
+      s3: s3,
+      s4: s4
+    }
+
+    ref.set(data);
   }
+
+  this.susceptibleOrgansString = function(){
+
+    var so = 'Susceptible organs: ';
+    for(var i=0; i<this.susceptibleOrgans.length; i++){
+      so += this.susceptibleOrgans[i] + ', ';
+    }
+    if(this.susceptibleOrgans.length == 0){
+      so += 'None..';
+    }
+    so = so.slice(0, -2);
+    so += '.';
+    return so;
+  }
+
   //this.SendOrgan(); // part of initialization
-  console.log('new player')
+
 }
 
 Player.prototype.Contains = function(list, ip){ // player list, string

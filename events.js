@@ -1,6 +1,6 @@
 /* events
 版本: 1.1.0.0
-2019/4/29
+2019/5/2
 */
 
 /* Timed Events */
@@ -123,6 +123,7 @@ function gotData2(data){ // value playing (void)
         p = player[index];
 
       }else{
+
         p = new Player();
 
       }
@@ -322,6 +323,31 @@ function gotData6(data){ // value blood (void)
 }
 
 function errData6(err){ // value (void)
+  console.log("Error!");
+  console.log(err);
+}
+
+function gotData7(data){ // value susceptibleOrgans (void)
+  console.log('value susceptibleOrgans');
+  if(loading){
+    return;
+  }
+  var dt = data.val();
+  var s1 = dt.s1;
+  var s2 = dt.s2;
+  var s3 = dt.s3;
+  var s4 = dt.s4;
+  s1 = s1.slice(20, -1);
+  s2 = s2.slice(20, -1);
+  s3 = s3.slice(20, -1);
+  s4 = s4.slice(20, -1);
+  seat1.player.susceptibleOrgans = s1.split(', ');
+  seat2.player.susceptibleOrgans = s2.split(', ');
+  seat3.player.susceptibleOrgans = s3.split(', ');
+  seat4.player.susceptibleOrgans = s4.split(', ');
+}
+
+function errData7(err){ // value (void)
   console.log("Error!");
   console.log(err);
 }

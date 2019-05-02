@@ -5,7 +5,7 @@
 聯絡方式
   Facebook連結: https://www.facebook.com/bruce.chen.372
   LINE ID: brucechen0
-最後修改日期: 2019/5/1
+最後修改日期: 2019/5/2
 版本: 1.1.0.0
 發表於: https://brucechen034020.github.io/
 程式碼尺度
@@ -101,6 +101,7 @@ function setup(){
   var ref4 = database.ref('turn');
   var ref5 = database.ref('order');
   var ref6 = database.ref('blood');
+  var ref7 = database.ref('susceptibleOrgans');
 
   ref1.on('value', gotData1, errData1);
   ref2.on('value', gotData2, errData2);
@@ -108,6 +109,7 @@ function setup(){
   ref4.on('value', gotData4, errData4);
   ref5.on('value', gotData5, errData5);
   ref6.on('value', gotData6, errData6);
+  ref7.on('value', gotData7, errData7);
 
   // Initailize document.body elements
   label1 = createElement('label', 'Your name: ');
@@ -153,8 +155,7 @@ order = new Order(null, null, null);
 }
 
 function draw(){
-//if(playing) me.printCards()
-//Deck.prototype.check();
+
   frameRate(10);
   background(255);
   fill(0, 64, 0);

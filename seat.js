@@ -1,6 +1,6 @@
 /*
 版本: 1.1.0.0
-2019/4/29
+2019/5/2
 */
 function Seat(x, y, w, id){ // Class
   /* Attrubutes */
@@ -79,15 +79,7 @@ function Seat(x, y, w, id){ // Class
       stroke(255, 0, 0);
       text(this.player.blood, this.x, this.y + this.w/2 + 30);
       stroke(0);
-      var so = 'Susceptible organs: ';
-      for(var i=0; i<this.player.susceptibleOrgans.length; i++){
-        so += this.player.susceptibleOrgans[i] + ', ';
-      }
-      if(this.player.susceptibleOrgans.length == 0){
-        so += 'None..';
-      }
-      so = so.slice(0, -2);
-      so += '.';
+      so = this.player.susceptibleOrgansString();
       text(so, this.x, this.y - this.w/2 - 15);
     }
   }
