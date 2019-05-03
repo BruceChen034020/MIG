@@ -1,6 +1,6 @@
 /*
 版本: 1.1.0.0
-2019/5/2
+2019/5/3
 */
 function Player(){ // Class
   /* Attributes */
@@ -66,16 +66,17 @@ function Player(){ // Class
   }
   this.SendOrgan = function(){ // If I get an organ, I should send it to the top of my seat
     // this is for 'me' only. Do not use it to other players.
+    var t = this;
+   setTimeout(function(){
+    for(var i=0; i<t.cards.length; i++){
 
-    for(var i=0; i<this.cards.length; i++){
+      if(t.cards[i].suit == 'Organ'){
 
-      if(this.cards[i].suit == 'Organ'){
-        setTimeout(function(){
-          this.susceptibleOrgans.push(this.cards[i].name);
+          t.susceptibleOrgans.push(t.cards[i].name);
           var index = i;
-          this.cards.splice(index, 1);
-          publicCards.push(this.cards[i]);
-        }, 2000);
+          publicCards.push(t.cards[i]);
+          t.cards.splice(index, 1);
+
       }
     }
     var ref = database.ref('susceptibleOrgans/');
@@ -104,6 +105,7 @@ function Player(){ // Class
     }
 
     ref.set(data);
+   }, 2000);
   }
 
   this.susceptibleOrgansString = function(){

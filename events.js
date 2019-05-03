@@ -341,10 +341,15 @@ function gotData7(data){ // value susceptibleOrgans (void)
   s2 = s2.slice(20, -1);
   s3 = s3.slice(20, -1);
   s4 = s4.slice(20, -1);
-  seat1.player.susceptibleOrgans = s1.split(', ');
-  seat2.player.susceptibleOrgans = s2.split(', ');
-  seat3.player.susceptibleOrgans = s3.split(', ');
-  seat4.player.susceptibleOrgans = s4.split(', ');
+  if(seat1.player != undefined)
+    seat1.player.susceptibleOrgans = s1.split(', ');
+  
+  if(seat2.player != undefined)
+    seat2.player.susceptibleOrgans = s2.split(', ');
+  if(seat3.player != undefined)
+    seat3.player.susceptibleOrgans = s3.split(', ');
+  if(seat4.player != undefined)
+    seat4.player.susceptibleOrgans = s4.split(', ');
 }
 
 function errData7(err){ // value (void)

@@ -111,9 +111,10 @@ Deck.prototype.printSequence = function(){
   console.log(str);
 }
 
-Deck.prototype.check = function(){ // check if there is repeating cards or missing cards
+Deck.prototype.check = function(totalNumCards){ // check if there is repeating cards or missing cards
   var count = [];
-  for(var i=0; i<192; i++){
+  var numCards = totalNumCards;
+  for(var i=0; i<numCards; i++){
     count[i] = 0;
   }
   for(var i=0; i<deck.length; i++){
@@ -127,7 +128,7 @@ Deck.prototype.check = function(){ // check if there is repeating cards or missi
       count[player[i].cards[j].id]++;
     }
   }
-  for(var i=0; i<192; i++){
+  for(var i=0; i<numCards; i++){
     if(count[i] != 1){
       console.log(i + ' repeating ' + count[i] + ' times.');
     }

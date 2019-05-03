@@ -273,7 +273,7 @@ for(i=0; i<=191; i++){
     c.push(c[i].copy(c.length));
   }
 }
-
+console.log('Total ' + c.length + ' cards');
 return c;
 
 }
